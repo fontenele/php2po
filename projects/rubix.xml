@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<php2po>
+    <project>
+        <name>Rubix</name>
+        <description>PHP FrameWork</description>
+        <path>/Applications/XAMPP/htdocs/rubix</path>
+        <lang>en_US</lang>
+    </project>
+    <langs></langs>
+    <terms></terms>
+</php2po>

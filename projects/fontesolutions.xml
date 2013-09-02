@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<php2po>
+    <project>
+        <name>FonteSolutions</name>
+        <description>Site da FonteSolutions</description>
+        <path>/Applications/XAMPP/htdocs/fs/app</path>
+        <lang>pt_BR</lang>
+    </project>
+    <langs></langs>
+    <terms></terms>
+</php2po>

@@ -1,0 +1,98 @@
+<h4>{$nomProjeto}</h4>
+
+<table id="tbl-idiomas" class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <span class="titulo">Idiomas</span>
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></button>
+                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a data-toggle="modal" href="#mdlNovoIdioma"><span class="glyphicon glyphicon-plus-sign"></span> Novo Idioma</a></li>
+                            <li><a data-toggle="modal" href="#modalTerms"><span class="glyphicon glyphicon-search"></span> Buscar Termos</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-save"></span> Exportar Tudo</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach from=$arrIdiomas item=idioma}
+            <tr><td><a href="{$hostPath}project/viewLang/lang/{$idioma}">{$idioma}</a> <span class="total">{if count($arrTerms) > 0}<span class="badge">{count($arrTerms)}</span>{/if}</span></td></tr>
+        {/foreach}
+    </tbody>
+</table>
+
+<div class="modal fade" id="mdlNovoIdioma" tabindex="-1" role="dialog" aria-labelledby="mdlNovoIdiomaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Novo Idioma</h4>
+            </div>
+
+            <div class="modal-body">
+                <form role="form" method="post">
+                    <div class="form-group">
+                        <label>Idioma</label>
+                        <select id="frk-lang" name="frk-lang" class="form-control">
+                            <option value="">Selecione</option>
+                            <option value="en_US">Inglês (EUA)</option>
+                            <option value="pt_BR">Português (Brasil)</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" id="btn-save-lang" class="btn btn-primary">Salvar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalTerms" tabindex="-1" role="dialog" aria-labelledby="modalTermsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Buscar Termos</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" method="post">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Diretório</label>
+                        <p class="col-lg-10 form-control-static">{$projectDir}</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Padrões</label>
+                        <div class="col-lg-10">
+                            <textarea class="form-control" name="txt-patterns" id="txt-patterns" disabled>{foreach from=$patterns item=padrao}{$padrao}
+{/foreach}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Ignorar</label>
+                        <div class="col-lg-10">
+                            <textarea class="form-control" name="txt-ignore-dirs" id="txt-ignore-dirs" placeholder="Diretórios ignorados por quebra de linha">{foreach from=$ignoreDirs item=dir}{$dir}
+{/foreach}</textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" id="btn-search-terms" loading class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+    </div>
+</div>

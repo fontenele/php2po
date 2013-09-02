@@ -1,0 +1,241 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FS 1.0\n"
+"POT-Creation-Date: 2013-03-19 22:45-0300\n"
+"PO-Revision-Date: 2013-03-19 22:45-0300\n"
+"Last-Translator: Guilherme Fontenele <guilherme@fontenele.net>\n"
+"Language-Team: FS Team <guilherme@fontesolutions.com.br>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: /Applications/XAMPP/htdocs/fs/app/module/Album\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: /Applications/XAMPP/htdocs/fs/app/module/Application\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/src/Application/Controller/IndexController.php:93
+msgid "Falha devido a razões desconhecidas."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/src/Application/Controller/IndexController.php:97
+msgid "Usuário inválido."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/src/Application/Controller/IndexController.php:100
+msgid "Login ambíguo."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:2
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:12
+msgid "Qualidade, Rapidez e Segurança"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:3
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:13
+msgid ""
+"Nossos profissionais são altamente qualificados no mercado de trabalho, com "
+"vasta experiência em desenvolvimento de sistemas de gestão, governamentais e "
+"de automação comercial."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:4
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:15
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:27
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:39
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:4
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:15
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:27
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:39
+msgid "Leia mais"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:12
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:2
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_principal.phtml:6
+msgid "Quem somos"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:13
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:3
+msgid ""
+"A FonteSolutions é uma empresa de tecnologia em atividade desde 2011, focada "
+"em inovação, buscando trazer confiança, facilidade e maior produtividade no "
+"dia-a-dia utilizando soluções informatizadas..."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:24
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:24
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_principal.phtml:42
+msgid "Serviços"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:25
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:25
+msgid ""
+"A FonteSolutions oferece seus serviços de desenvolvimento tanto a empresas "
+"com sistemas sob medida, como a comunidade de desenvolvimento, com sistemas "
+"de licença Opensource..."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:36
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:36
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_principal.phtml:48
+msgid "Suporte"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/index.phtml:37
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/application/index/quem-somos.phtml:37
+msgid ""
+"A FonteSolutions disponibiliza suporte integrado em suas soluções, com "
+"acesso direto ao serviço de Suporte ao Usuário. Esse suporte também poderá "
+"ser acessado externamente pelo usuário. Cada cliente..."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:1
+msgid "Ocorreu um erro de Página não Encontrada (404)"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:10
+msgid "O controlador requisitado não conseguiu despachar a requisição."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:13
+msgid ""
+"O controlador requisitado não pode ser mapeado para uma classe de controle "
+"existente."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:16
+msgid "O controlador requisitado não foi despachado."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:19
+msgid "A URL solicitada não pode ser encontrada pelo roteamento."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:22
+msgid "Não conseguimos descobrir porque a página não foi encontrada."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:34
+msgid "Controlador"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:41
+#, php-format
+msgid "resolve %s"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:53
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/index.phtml:8
+msgid "Informações adicionais"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:56
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:80
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/index.phtml:11
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/index.phtml:35
+msgid "Arquivo"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:60
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:84
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/index.phtml:15
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/index.phtml:39
+msgid "Mensagem"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:64
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:88
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/index.phtml:19
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/index.phtml:43
+msgid "Rastreabilidade"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:74
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/index.phtml:29
+msgid "Exceções anteriores"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/404.phtml:103
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/index.phtml:58
+msgid "Nenhuma exceção disponível."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/error/index.phtml:1
+msgid "Ocorreu um erro"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/layout.phtml:6
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/layout.phtml:26
+msgid "nome-aplicacao"
+msgstr "FonteSolutions"
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/layout.phtml:42
+msgid "Sucesso!"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/layout.phtml:53
+msgid "Falha!"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/layout.phtml:63
+msgid "Todos os direitos reservados."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_direita.phtml:4
+msgid "Acesso"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_direita.phtml:7
+msgid "Entrar"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_direita.phtml:17
+msgid "Senha"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_direita.phtml:21
+msgid "Enviar"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_direita.phtml:28
+msgid "Sair"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_principal.phtml:3
+msgid "Principal"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_principal.phtml:19
+msgid "Produtos"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_principal.phtml:24
+msgid "Apps para iPhone/iPad"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_principal.phtml:29
+msgid "Sistema de Gestão"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_principal.phtml:32
+msgid "Sites Empresariais"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_principal.phtml:37
+msgid "Advergames"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_principal.phtml:45
+msgid "Clientes"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/fs/app/module/Application/view/layout/menu_principal.phtml:51
+msgid "Contato"
+msgstr ""
+
+#~ msgid "All rights reserved."
+#~ msgstr "Todos os direitos reservados."

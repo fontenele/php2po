@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>php2po</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="php2po - Create and convert Po and Mo translations files.">
+        <meta name="author" content="Guilherme Fontenele, Mathias Grimm">
+        <link href="{$hostPath}css/bootstrap.min.css" rel="stylesheet">
+        <link href="{$hostPath}css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="{$hostPath}css/style.css" rel="stylesheet">
+        {foreach from=$php2poCssFiles item=css}
+            <link href="{$hostPath}css/{$css}" rel="stylesheet">
+        {/foreach}
+	</head>
+	<body>
+
+        <script>
+            var hostPath = '{$hostPath}';
+        </script>
+
+        <div id="wrap">
+            <div class="container">
+
+                <div class="page-header">
+                    <h1>php2po</h1>
+                </div>
+
+                <ol class="breadcrumb">
+                    {assign var=php2poTotalBreadCrumbs value=count($php2poBreadCrumbs)}
+                    {foreach from=$php2poBreadCrumbs item=item key=key}
+                        {if $key+1 == $php2poTotalBreadCrumbs}
+                            <li class='active'>{$item.0}</li>
+                        {else}
+                            <li><a href='{$hostPath}{$item.1}'>{$item.0}</a></li>
+                        {/if}
+                    {/foreach}
+                </ol>
+
+                {$php2poContent}
+
+            </div>
+        </div>
+
+        <div id="footer">
+            <div class="container">
+                <p class="text-muted credit"> <a href="https://github.com/fontenele/php2po">php2po</a></p>
+            </div>
+        </div>
+
+        <script src="{$hostPath}js/jquery.js"></script>
+        <script src="{$hostPath}js/bootstrap.min.js"></script>
+        <script src="{$hostPath}js/script.js"></script>
+        {foreach from=$php2poJsFiles item=js}
+            <script src="{$hostPath}js/{$js}"></script>
+        {/foreach}
+	</body>
+</html>

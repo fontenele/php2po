@@ -1,0 +1,329 @@
+msgid ""msgstr """Project-Id-Version: FS 1.0\n"
+"POT-Creation-Date: 2013-03-19 22:45-0300\n"
+"PO-Revision-Date: 2013-03-19 22:45-0300\n"
+"Last-Translator: Guilherme Fontenele <guilherme@fontenele.net>\n"
+"Language-Team: FS Team <guilherme@fontesolutions.com.br>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: /Applications/XAMPP/htdocs/fs/app/module/Album\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: /Applications/XAMPP/htdocs/fs/app/module/Application\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/MenusController.php:40
+msgid "Menus"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/MenusController.php:51
+msgid "Alterar"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/MenusController.php:68
+msgid "Selecionar"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/MenusController.php:142
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/AcessosController.php:91
+msgid "Item de Menu editado com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/MenusController.php:144
+msgid "Falha ao salvar Item de Menu."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/MenusController.php:155
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/PerfisController.php:93
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/PerfisController.php:128
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/UsuariosController.php:96
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/UsuariosController.php:132
+#: /var/www/htdocs/rubix/module/Artigos/src/Artigos/Controller/ArtigosController.php:99
+#: /var/www/htdocs/rubix/module/Artigos/src/Artigos/Controller/ArtigosController.php:143
+msgid "Código não informado."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/MenusController.php:165
+msgid "Item de menu excluído com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/MenusController.php:258
+msgid "Menus gerados com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/PerfisController.php:37
+msgid "Perfis"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/PerfisController.php:62
+msgid "Novo Perfil"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/PerfisController.php:67
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/UsuariosController.php:67
+#: /var/www/htdocs/rubix/module/Artigos/src/Artigos/Controller/ArtigosController.php:66
+msgid "Adicionar"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/PerfisController.php:77
+msgid "Perfil criado com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/PerfisController.php:80
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/PerfisController.php:115
+msgid "Falha ao salvar Perfil."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/PerfisController.php:89
+msgid "Editar Perfil"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/PerfisController.php:112
+msgid "Perfil editado com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/PerfisController.php:137
+msgid "Perfil excluído com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/AcessosController.php:43
+msgid "Salvar"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/UsuariosController.php:37
+msgid "Usuários"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/UsuariosController.php:62
+msgid "Novo Usuário"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/UsuariosController.php:80
+msgid "Usuário criado com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/UsuariosController.php:83
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/UsuariosController.php:119
+msgid "Falha ao salvar Usuário."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/UsuariosController.php:92
+msgid "Editar Usuário"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/UsuariosController.php:116
+msgid "Usuário editado com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Gerencial/src/Gerencial/Controller/UsuariosController.php:141
+msgid "Usuário excluído com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Artigos/src/Artigos/Controller/ArtigosController.php:31
+msgid "Artigo"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Artigos/src/Artigos/Controller/ArtigosController.php:61
+msgid "Novo Artigo"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Artigos/src/Artigos/Controller/ArtigosController.php:83
+msgid "Artigo criado com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Artigos/src/Artigos/Controller/ArtigosController.php:86
+#: /var/www/htdocs/rubix/module/Artigos/src/Artigos/Controller/ArtigosController.php:130
+msgid "Falha ao salvar Artigo."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Artigos/src/Artigos/Controller/ArtigosController.php:95
+msgid "Editar Artigo"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Artigos/src/Artigos/Controller/ArtigosController.php:127
+msgid "Artigo editado com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Artigos/src/Artigos/Controller/ArtigosController.php:152
+msgid "Artigo excluído com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:2
+msgid "Quem somos"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:3
+msgid "A FonteSolutions é uma empresa de tecnologia em atividade desde 2011, focada em inovação, buscando trazer confiança, facilidade e maior produtividade no dia-a-dia utilizando soluções informatizadas..."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:4
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:15
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:27
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:39
+msgid "Leia mais"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:12
+msgid "Qualidade, Rapidez e Segurança"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:13
+msgid "Nossos profissionais são altamente qualificados no mercado de trabalho, com vasta experiência em desenvolvimento de sistemas de gestão, governamentais e de automação comercial."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:24
+msgid "Serviços"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:25
+msgid "A FonteSolutions oferece seus serviços de desenvolvimento tanto a empresas com sistemas sob medida, como a comunidade de desenvolvimento, com sistemas de licença Opensource..."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:36
+msgid "Suporte"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/application/index/quem-somos.phtml:37
+msgid "A FonteSolutions disponibiliza suporte integrado em suas soluções, com acesso direto ao serviço de Suporte ao Usuário. Esse suporte também poderá ser acessado externamente pelo usuário. Cada cliente..."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/index.phtml:1
+#: /var/www/htdocs/rubix/teste.phtml:1
+msgid "Ocorreu um erro"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/index.phtml:8
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:53
+#: /var/www/htdocs/rubix/teste.phtml:8
+msgid "Informações adicionais"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/index.phtml:11
+#: /var/www/htdocs/rubix/module/Application/view/error/index.phtml:35
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:56
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:80
+#: /var/www/htdocs/rubix/teste.phtml:11
+#: /var/www/htdocs/rubix/teste.phtml:35
+msgid "Arquivo"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/index.phtml:15
+#: /var/www/htdocs/rubix/module/Application/view/error/index.phtml:39
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:60
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:84
+#: /var/www/htdocs/rubix/teste.phtml:15
+#: /var/www/htdocs/rubix/teste.phtml:39
+msgid "Mensagem"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/index.phtml:19
+#: /var/www/htdocs/rubix/module/Application/view/error/index.phtml:43
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:64
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:88
+#: /var/www/htdocs/rubix/teste.phtml:19
+#: /var/www/htdocs/rubix/teste.phtml:43
+msgid "Rastreabilidade"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/index.phtml:29
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:74
+#: /var/www/htdocs/rubix/teste.phtml:29
+msgid "Exceções anteriores"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/index.phtml:58
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:103
+#: /var/www/htdocs/rubix/teste.phtml:58
+msgid "Nenhuma exceção disponível."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:1
+msgid "Ocorreu um erro de Página não Encontrada (404)"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:10
+msgid "O controlador requisitado não conseguiu despachar a requisição."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:13
+msgid "O controlador requisitado não pode ser mapeado para uma classe de controle existente."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:16
+msgid "O controlador requisitado não foi despachado."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:19
+msgid "A URL solicitada não pode ser encontrada pelo roteamento."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:22
+msgid "Não conseguimos descobrir porque a página não foi encontrada."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:34
+msgid "Controlador"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/error/404.phtml:41
+msgid "resolve %s"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/layout/menu_direita.phtml:11
+msgid "Entrar"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/layout/menu_direita.phtml:21
+msgid "Senha"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/layout/menu_direita.phtml:25
+msgid "Enviar"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/layout/layout.phtml:6
+#: /var/www/htdocs/rubix/module/Application/view/layout/layout.phtml:38
+msgid "nome-aplicacao"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/layout/layout.phtml:55
+msgid "Sucesso!"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/layout/layout.phtml:66
+msgid "Falha!"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/view/layout/layout.phtml:144
+msgid "Todos os direitos reservados."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/src/Application/Controller/GaleriaFotosController.php:37
+msgid "Adicionar Imagem"
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/src/Application/Controller/IndexController.php:129
+msgid "Contato enviado com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/src/Application/Controller/IndexController.php:147
+msgid "Autenticado com sucesso."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/src/Application/Controller/IndexController.php:162
+msgid "Falha devido a razões desconhecidas."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/src/Application/Controller/IndexController.php:166
+msgid "Usuário inválido."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/src/Application/Controller/IndexController.php:169
+msgid "Login ambíguo."
+msgstr ""
+
+#: /var/www/htdocs/rubix/module/Application/src/Application/Controller/IndexController.php:187
+msgid "Obrigado e volte sempre!"
+msgstr ""
+
