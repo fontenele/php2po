@@ -173,26 +173,31 @@ class Project extends Controller {
                         $termsOrigem .= "{$_origem}\n";
 
                         $strUrlParams = rawurlencode($_origem);
-                        $url = "http://translate.google.com/?sl=". $origem ."&tl=". $destino ."&js=n&prev=_t&hl=it&ie=UTF-8&eotf=1&text=". $strUrlParams ."";
-
+                        //$url = "http://translate.google.com/?sl=". $origem ."&tl=". $destino ."&js=n&prev=_t&hl=it&ie=UTF-8&eotf=1&text=". $strUrlParams ."";
+                        
+                        $url = "https://translate.google.com/translate_a/t?client=t&sl={$origem}&tl={$destino}&hl=pt-BR&ie=UTF-8&oe=UTF-8&prev=btn&ssel=4&tsel=4&q={$strUrlParams}";
+                        
                         $curl = curl_init($url);
                         curl_setopt($curl, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
                         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
                         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
                         $html = curl_exec($curl);
                         curl_close($curl);
-
+                        
                         error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
                         ini_set('display_errors', false);
-
-                        $dom = new DOMDocument();
+                        
+                        $translate = explode('"',substr($html, 4));
+                        $_destino = array_shift($translate);
+                        
+                        /*$dom = new DOMDocument();
                         $dom->loadHTML($html);
                         $xpath = new DOMXPath($dom);
                         $tags = $xpath->query('//*[@id="result_box"]');
 
                         foreach ($tags as $tag) {
                             $_destino = trim($tag->nodeValue);
-                        }
+                        }*/
 
                         $terms['term_translate_' . $id] = $_destino;
                     }

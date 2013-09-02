@@ -3,8 +3,8 @@
     <project>
         <name>Rubix</name>
         <description>PHP FrameWork</description>
-        <path>/Applications/XAMPP/htdocs/rubix</path>
-        <lang>en_US</lang>
+        <path>/var/www/htdocs/rubix/</path>
+        <lang>pt_BR</lang>
     </project>
     <langs></langs>
     <terms></terms>
