@@ -138,11 +138,12 @@ class Project extends Controller {
         $poUtils->startSearch();
         
         $xml = new FXml();
-        $xml->createTerms($this->session->getAttribute('des-caminho-xml'), $poUtils->getTerms());
-
-        $this->session->setAttribute('arr-terms', $poUtils->getTerms());
-
-        echo json_encode(array('result' => '1', 'total' => count($poUtils->getTerms())));
+        if($xml->createTerms($this->session->getAttribute('des-caminho-xml'), $poUtils->getTerms())) {
+            $this->session->setAttribute('arr-terms', $poUtils->getTerms());
+            echo json_encode(array('result' => '1', 'total' => count($poUtils->getTerms())));
+        }else{
+            echo json_encode(array('result' => '2'));
+        }
     }
 
     public function viewLang() {
