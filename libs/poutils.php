@@ -7,7 +7,7 @@ class POutils {
 
 	public function __construct($directory) {
 		if(is_dir($directory)) {
-			$this->dir = dir($directory);
+			$this->dir = dir(substr($directory, 0, strlen($directory) - 1));
 		}
 	}
 
@@ -51,7 +51,7 @@ class POutils {
 		
 		$terms = $result['palavra'];
 		$toFindInFile = $result['tudo'];
-
+        
 		foreach($arLinhas as $i => $conteudoLinha) {
 			$linha = $i + 1;
 			foreach($toFindInFile as $j => $match) {

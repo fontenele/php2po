@@ -19,7 +19,7 @@ class Project extends Controller {
         $this->session->setAttribute('frk-idioma-default', $this->request->post->offsetGet('frk-idioma-default'));
 
         $xml = new FXml();
-        $filename = $xml->create(
+        $filename = $xml->createProject(
                 $this->request->post->offsetGet('nom-projeto'),
                 $this->request->post->offsetGet('des-projeto'),
                 $this->request->post->offsetGet('des-caminho'),
@@ -27,6 +27,7 @@ class Project extends Controller {
             );
 
         if($filename) {
+            $this->session->setAttribute('arr-langs', array($this->request->post->offsetGet('frk-idioma-default') => $this->request->post->offsetGet('frk-idioma-default')));
             $this->session->setAttribute('des-caminho-xml', $filename);
             header('location: ' . APPLICATION_URL . 'project/view');
         }else{
@@ -135,6 +136,9 @@ class Project extends Controller {
 
         $poUtils = new POutils($dir);
         $poUtils->startSearch();
+        
+        $xml = new FXml();
+        $xml->createTerms($this->session->getAttribute('des-caminho-xml'), $poUtils->getTerms());
 
         $this->session->setAttribute('arr-terms', $poUtils->getTerms());
 

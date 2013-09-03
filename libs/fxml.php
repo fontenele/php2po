@@ -2,7 +2,7 @@
 
 class FXml {
 
-    public function create($name, $description, $path, $lang) {
+    public function createProject($name, $description, $path, $lang) {
         $xml = <<<XML
 <?xml version="1.0"?>
 <php2po>
@@ -17,13 +17,41 @@ class FXml {
 </php2po>
 XML;
 
-        $filename = APPLICATION_PATH . "projects/{$this->removeSpecialChars($name)}.xml";
+        if(!is_dir(APPLICATION_PATH . "projects/{$this->removeSpecialChars($name)}")) {
+            mkdir(APPLICATION_PATH . "projects/{$this->removeSpecialChars($name)}", 0777, true);
+        }
+        
+        $filename = APPLICATION_PATH . "projects/{$this->removeSpecialChars($name)}/project.xml";
 
         if(file_put_contents($filename, $xml)) {
             return $filename;
         }else{
             return false;
         }
+    }
+    
+    public function createTerms($filename, $terms) {
+        $xml = simplexml_load_file($filename);
+        
+        $xmlTerms = $xml->terms;
+        
+        foreach($terms as $term => $files) {
+            $xmlTerm = $xmlTerms->addChild('term');
+            $xmlTerm->addChild('desc', $term);
+            
+            $xmlFiles = $xmlTerm->addChild("files");
+            
+            foreach($files as $file => $lines) {
+                foreach($lines as $line) {
+                    $xmlFile = $xmlFiles->addChild('file');
+                    $xmlFile->addAttribute('name', $file);
+                    $xmlFile->addAttribute('line', $line);
+                }
+            }
+        }
+        
+        
+        return $xml->asXML($filename);
     }
 
     private function removeSpecialChars($string) {
