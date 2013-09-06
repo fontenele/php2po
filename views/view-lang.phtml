@@ -1,60 +1,62 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <span class="titulo">Tradução - <strong>{$lang}</strong></span>
-        <div class="pull-right">
-            <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></button>
-                <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a data-toggle="modal" href="#mdlGoogleAll"><span class="glyphicon glyphicon-globe"></span> Tradução automática</a></li>
-                </ul>
+<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12  col-lg-offset-1 col-md-offset-1">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="titulo">Tradução - <strong>{$lang}</strong></span>
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></button>
+                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a data-toggle="modal" href="#mdlGoogleAll"><span class="glyphicon glyphicon-globe"></span> Tradução automática</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
-    <form role="form" id="frm-table-terms">
+        <form role="form" id="frm-table-terms">
 
-        <table class="table" id="tbl-terms">
-            <thead>
-                <tr>
-                    <th width="4%">#</th>
-                    <th width="43%">Texto</th>
-                    <th width="43%">Tradução</th>
-                    <th width="10%">Opções</th>
-                </tr>
-            </thead>
-            <tbody>
-                {assign var=incTerm value=0}
-                {foreach from=$terms key=texto item=term}
+            <table class="table" id="tbl-terms">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="#" data-toggle="tooltip" title="{foreach from=$term key=file item=lines}{$file} {foreach from=$lines item=line} #{$line}{/foreach}<br />{/foreach}">{$incTerm}</a>
-                        </td>
-                        <td class="term">
-                            {$texto} <input type="hidden" name="term_origin_{$incTerm}" value="{$texto}" />
-                        </td>
-                        <td>
-                            <input name="term_translate_{$incTerm++}" class="form-control" type="text" />
-                        </td>
-                        <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></button>
-                                <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a><span class="glyphicon glyphicon-globe"></span> Traduzir Item</a></li>
-                                </ul>
-                            </div>
-                        </td>
+                        <th width="4%">#</th>
+                        <th width="43%">Texto</th>
+                        <th width="42%">Tradução</th>
+                        <th width="15%">Opções</th>
                     </tr>
-                {/foreach}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {assign var=incTerm value=0}
+                    {foreach from=$terms key=texto item=term}
+                        <tr>
+                            <td>
+                                <a href="#" data-toggle="tooltip" title="{foreach from=$term key=file item=lines}{$file} {foreach from=$lines item=line} #{$line}{/foreach}<br />{/foreach}">{$incTerm}</a>
+                            </td>
+                            <td class="term">
+                                {$texto} <input type="hidden" name="term_origin_{$incTerm}" value="{$texto}" />
+                            </td>
+                            <td>
+                                <input name="term_translate_{$incTerm++}" class="form-control" type="text" />
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></button>
+                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a><span class="glyphicon glyphicon-globe"></span> Traduzir Item</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>
 
-    </form>
+        </form>
+    </div>
 </div>
 
 <div class="modal fade" id="mdlGoogleAll" tabindex="-1" role="dialog" aria-labelledby="mdlNovoIdiomaLabel" aria-hidden="true">
@@ -72,16 +74,18 @@
                         <label>Idioma Origem</label>
                         <select id="frk-lang-origem" name="frk-lang-origem" class="form-control">
                             <option value="">Selecione</option>
-                            <option value="en_US">Inglês (EUA)</option>
-                            <option value="pt_BR">Português (Brasil)</option>
+                            {foreach from=$arrAllLangs item=label key=key}
+                                <option value="{$key}">{$label}</option>
+                            {/foreach}
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Idioma Destino</label>
                         <select id="frk-lang-destino" name="frk-lang-destino" class="form-control">
                             <option value="">Selecione</option>
-                            <option value="en_US">Inglês (EUA)</option>
-                            <option value="pt_BR">Português (Brasil)</option>
+                            {foreach from=$arrAllLangs item=label key=key}
+                                <option value="{$key}">{$label}</option>
+                            {/foreach}
                         </select>
                     </div>
                 </form>

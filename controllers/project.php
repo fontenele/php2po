@@ -8,6 +8,13 @@ class Project extends Controller {
 
     public function start() {
         $this->breadcrumbs[] = array('Novo Projeto', 'project/start');
+        
+        $arrAllLangs = array();
+        $xml = simplexml_load_file(APPLICATION_PATH . 'locales.xml');
+        foreach($xml->locale as $locale) {
+            $arrAllLangs[(string)$locale->codes->code->standard->representation] = (string)$locale->englishName;
+        }
+        $this->view->assign('arrAllLangs', $arrAllLangs);
 
         $this->displayTemplate('start.phtml');
     }
@@ -42,7 +49,7 @@ class Project extends Controller {
         $projects = array();
 
         while($project = $dir->read()) {
-            if(!in_array($project, array('..', '.'))) {
+            if(!in_array($project, array('.svn', '..', '.', 'index.php'))) {
                 $projects[] = $project;
             }
         }
@@ -52,31 +59,44 @@ class Project extends Controller {
     }
 
     public function importSave() {
-        $xml = $filename = null;
+        $xml = $project = null;
 
         if($this->request->post->offsetGet('frk-project')) {
-            $xml = simplexml_load_file(APPLICATION_PATH . "projects/{$this->request->post->offsetGet('frk-project')}");
-            $filename = $this->request->post->offsetGet('frk-project');
+            $xml = simplexml_load_file(APPLICATION_PATH . "projects/{$this->request->post->offsetGet('frk-project')}/project.xml");
+            $project = $this->request->post->offsetGet('frk-project');
         }elseif($this->request->files->offsetGet('des-caminho-xml')) {
-            $file = $this->request->files->offsetGet('des-caminho-xml');
+            /* @todo desabilitado pela mudança no diretorio project - remover comentário */
+            /*$file = $this->request->files->offsetGet('des-caminho-xml');
 
             if(move_uploaded_file($file['tmp_name'], APPLICATION_PATH . "projects/{$file['name']}")) {
                 $xml = simplexml_load_file(APPLICATION_PATH . "projects/{$file['name']}");
                 $filename = $file['name'];
-            }
+            }*/
         }
 
         if($xml) {
-            foreach($xml->xpath('//project') as $project) {
-                $this->session->setAttribute('nom-projeto', (string)$project->name);
-                $this->session->setAttribute('des-projeto', (string)$project->description);
-                $this->session->setAttribute('des-caminho', (string)$project->path);
-                $this->session->setAttribute('frk-idioma-default', (string)$project->lang);
-                $langs = array((string)$project->lang => (string)$project->lang);
+            foreach($xml->xpath('//project') as $_project) {
+                $this->session->setAttribute('nom-projeto', (string)$_project->name);
+                $this->session->setAttribute('des-projeto', (string)$_project->description);
+                $this->session->setAttribute('des-caminho', (string)$_project->path);
+                $this->session->setAttribute('frk-idioma-default', (string)$_project->lang);
+                $langs = array((string)$_project->lang => (string)$_project->lang);
                 $this->session->setAttribute('arr-langs', $langs);
             }
 
-            $this->session->setAttribute('des-caminho-xml', APPLICATION_PATH . "projects/{$filename}");
+            $this->session->setAttribute('des-caminho-xml', APPLICATION_PATH . "projects/{$project}/project.xml");
+            
+            $arrTerms = array();
+            if($xml->terms && count($xml->terms->term)) {
+                foreach($xml->terms->term as $xmlTerm) {
+                    $arrTerms[(string)$xmlTerm->desc] = array();
+                    foreach($xmlTerm->files->file as $xmlFile) {
+                        $arrTerms[(string)$xmlTerm->desc][(string)$xmlFile->attributes()->name][(string)$xmlFile->attributes()->line] = (string)$xmlFile->attributes()->line;
+                    }
+                }
+            }
+            
+            $this->session->setAttribute('arr-terms', $arrTerms);
             header('location: ' . APPLICATION_URL . 'project/view');
         }
     }
@@ -96,6 +116,13 @@ class Project extends Controller {
                 $this->session->getAttribute('arr-terms') && is_array($this->session->getAttribute('arr-terms')) ?
                     $this->session->getAttribute('arr-terms') : array()
             );
+        
+        $arrAllLangs = array();
+        $xml = simplexml_load_file(APPLICATION_PATH . 'locales.xml');
+        foreach($xml->locale as $locale) {
+            $arrAllLangs[(string)$locale->codes->code->standard->representation] = (string)$locale->englishName;
+        }
+        $this->view->assign('arrAllLangs', $arrAllLangs);
 
         $this->displayTemplate('view-project.phtml');
     }
@@ -134,11 +161,15 @@ class Project extends Controller {
         $dir = $this->session->getAttribute('des-caminho');
         $langs = $this->session->getAttribute('arr-langs');
 
-        $poUtils = new POutils($dir);
+        $poUtils = new POutils($dir, $patterns, $ignore);
+        
         $poUtils->startSearch();
+        $terms = $poUtils->getTerms();
+        
+        // criar po das langs existentes
         
         $xml = new FXml();
-        if($xml->createTerms($this->session->getAttribute('des-caminho-xml'), $poUtils->getTerms())) {
+        if($xml->createTerms($this->session->getAttribute('des-caminho-xml'), $terms)) {
             $this->session->setAttribute('arr-terms', $poUtils->getTerms());
             echo json_encode(array('result' => '1', 'total' => count($poUtils->getTerms())));
         }else{
@@ -152,6 +183,14 @@ class Project extends Controller {
 
         $this->view->assign('lang', $this->request->get->offsetGet('lang'));
         $this->view->assign('terms', $this->session->getAttribute('arr-terms'));
+        
+        $arrAllLangs = array();
+        $xml = simplexml_load_file(APPLICATION_PATH . 'locales.xml');
+        foreach($xml->locale as $locale) {
+            $arrAllLangs[(string)$locale->codes->code->standard->representation] = (string)$locale->englishName;
+        }
+        
+        $this->view->assign('arrAllLangs', $arrAllLangs);
 
         $this->displayTemplate('view-lang.phtml');
     }
@@ -194,15 +233,6 @@ class Project extends Controller {
                         
                         $translate = explode('"',substr($html, 4));
                         $_destino = array_shift($translate);
-                        
-                        /*$dom = new DOMDocument();
-                        $dom->loadHTML($html);
-                        $xpath = new DOMXPath($dom);
-                        $tags = $xpath->query('//*[@id="result_box"]');
-
-                        foreach ($tags as $tag) {
-                            $_destino = trim($tag->nodeValue);
-                        }*/
 
                         $terms['term_translate_' . $id] = $_destino;
                     }

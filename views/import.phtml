@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <label for="frk-project" class="col-lg-2 control-label">Reabrir</label>
                         <div class="col-lg-10">
-                            <select id="frk-project" name="frk-project" class="form-control">
+                            <select required id="frk-project" name="frk-project" class="form-control">
                                 <option value="">Selecione</option>
                                 {foreach from=$projects item=project}
                                     <option value="{$project}">{$project}</option>

@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    /* @todo desabilitado pela mudança no diretorio project - remover */
+    $('#des-caminho-xml_file').attr('disabled', 'disabled');
+    
     $('#des-caminho-xml').hide();
     $('#des-caminho-xml_aux').hide();
 
@@ -31,7 +34,8 @@ $(document).ready(function() {
         if($(this).val() != '') {
             $('#des-caminho-xml_file').attr('disabled', 'disabled');
         }else{
-            $('#des-caminho-xml_file').removeAttr('disabled');
+            /* @todo desabilitado pela mudança no diretorio project - remover comentário */
+            //$('#des-caminho-xml_file').removeAttr('disabled');
         }
     });
 });

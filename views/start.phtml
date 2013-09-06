@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+    <div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Novo Projeto</h3>
@@ -28,9 +28,10 @@
                         <label for="frk-idioma-default" class="col-lg-2 control-label">Idioma</label>
                         <div class="col-lg-10">
                             <select required name="frk-idioma-default" class="form-control" id="frk-idioma-default">
-                                <option>Selecione</option>
-                                <option value="pt_BR">Português (Brasil)</option>
-                                <option value="en_US">Inglês (EUA)</option>
+                                <option value="">Selecione</option>
+                                {foreach from=$arrAllLangs item=label key=key}
+                                    <option value="{$key}">{$label}</option>
+                                {/foreach}
                             </select>
                         </div>
                     </div>

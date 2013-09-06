@@ -1,33 +1,35 @@
-<h4>{$nomProjeto}</h4>
+<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12  col-lg-offset-1 col-md-offset-1">
+    <h4>{$nomProjeto}</h4>
 
-<table id="tbl-idiomas" class="table table-bordered table-striped table-hover">
-    <thead>
-        <tr>
-            <th>
-                <span class="titulo">Idiomas</span>
-                <div class="pull-right">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></button>
-                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a data-toggle="modal" href="#mdlNovoIdioma"><span class="glyphicon glyphicon-plus-sign"></span> Novo Idioma</a></li>
-                            <li><a data-toggle="modal" href="#modalTerms"><span class="glyphicon glyphicon-search"></span> Buscar Termos</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-save"></span> Exportar Tudo</a></li>
-                        </ul>
+    <table id="tbl-idiomas" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <span class="titulo">Idiomas</span>
+                    <div class="pull-right">
+                        <div class="btn-group dropup">
+                            <button type="button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></button>
+                            <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a data-toggle="modal" href="#mdlNovoIdioma"><span class="glyphicon glyphicon-plus-sign"></span> Novo Idioma</a></li>
+                                <li><a data-toggle="modal" href="#modalTerms"><span class="glyphicon glyphicon-search"></span> Buscar Termos</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-save"></span> Exportar Tudo</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        {foreach from=$arrIdiomas item=idioma}
-            <tr><td><a href="{$hostPath}project/viewLang/lang/{$idioma}">{$idioma}</a> <span class="total">{if count($arrTerms) > 0}<span class="badge">{count($arrTerms)}</span>{/if}</span></td></tr>
-        {/foreach}
-    </tbody>
-</table>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {foreach from=$arrIdiomas item=idioma}
+                <tr><td><a href="{$hostPath}project/viewLang/lang/{$idioma}">{$idioma}</a> <span class="total">{if count($arrTerms) > 0}<span class="badge">{count($arrTerms)}</span>{/if}</span></td></tr>
+            {/foreach}
+        </tbody>
+    </table>
+</div>
 
 <div class="modal fade" id="mdlNovoIdioma" tabindex="-1" role="dialog" aria-labelledby="mdlNovoIdiomaLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -44,8 +46,9 @@
                         <label>Idioma</label>
                         <select id="frk-lang" name="frk-lang" class="form-control">
                             <option value="">Selecione</option>
-                            <option value="en_US">Inglês (EUA)</option>
-                            <option value="pt_BR">Português (Brasil)</option>
+                            {foreach from=$arrAllLangs item=label key=key}
+                                <option value="{$key}">{$label}</option>
+                            {/foreach}
                         </select>
                     </div>
                 </form>

@@ -4,12 +4,28 @@ class POutils {
 
 	private $dir;
 	private $terms = array();
+    private $patterns = array();
+    private $ignoreDirs = array();
 
-	public function __construct($directory) {
+	public function __construct($directory, $patterns = null, $ignoreDirs = null) {
 		if(is_dir($directory)) {
 			$this->dir = dir(substr($directory, 0, strlen($directory) - 1));
 		}
+        if($patterns) {
+            $this->setPatterns($patterns);
+        }
+        if($ignoreDirs) {
+            $this->setIgnoreDirs($ignoreDirs);
+        }
 	}
+    
+    public function setPatterns($patterns) {
+        $this->patterns = is_array($patterns) ? $patterns : array_filter(explode("\n",$patterns), 'strlen');
+    }
+    
+    public function setIgnoreDirs($ignoreDirs) {
+        $this->ignoreDirs = is_array($ignoreDirs) ? $ignoreDirs : array_filter(explode("\n",$ignoreDirs), 'strlen');
+    }
 
 	public function getTerms() { return $this->terms; }
 
@@ -18,7 +34,7 @@ class POutils {
 		else{ $dir = dir($dir); }
 
 		while(($_dir = $dir->read()) != false) {
-			if (!in_array($_dir, array('.', '..', '.svn'))) {
+			if (!in_array($_dir, $this->ignoreDirs)) {
 				if(is_dir($dir->path . '/' . $_dir)) {
 					$this->findInDir($dir->path . '/' . $_dir);
 				}else{
@@ -29,11 +45,10 @@ class POutils {
 	}
 
 	protected function findInDir($dir) {
-		
 		$dir = dir($dir);
 
 		while (($_dir = $dir->read()) != false) {
-			if (!in_array($_dir, array('.', '..', '.svn'))) {
+			if (!in_array($_dir, $this->ignoreDirs)) {
 				if(is_dir($dir->path . '/' . $_dir)) {
 					$this->findInDir($dir->path . '/' . $_dir);
 				}else{
@@ -62,7 +77,8 @@ class POutils {
 		}
 	}
 
-    public function createPoFile() {
+    public function createPoFile($project, $lang) {
+        $tmpFile = md5(date('Y-m-d-h:i:s'));
         $output = '/tmp/output.po';
         $res = fopen($output, 'w');
 
