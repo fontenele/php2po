@@ -5,7 +5,7 @@ $(document).ready(function() {
     });
 
     $('#btn-google-all').on('click', function() {
-        $(this).html('<img src=" ' + hostPath + '/img/loading.gif" />');
+        $(this).html('<img src=" ' + hostPath + 'img/loading.gif" />');
         if($('#frk-lang-origem').val() != '' && $('#frk-lang-destino').val() != '') {
             $.post(
                     hostPath + 'project/googleAll',
@@ -25,5 +25,13 @@ $(document).ready(function() {
         }
 
         return false;
+    });
+
+    $('#btn-save-po').on('click', function() {
+        var wdw = window.open(hostPath + 'project/exportPo/project/' + project +'/lang/' + lang, 'Exportar ' + lang + '.po');
+    });
+
+    $('#btn-save-mo').on('click', function() {
+        var wdw = window.open(hostPath + 'project/exportMo/project/' + project +'/lang/' + lang, 'Exportar ' + lang + '.po');
     });
 });

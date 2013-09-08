@@ -21,6 +21,7 @@ function autoload($class) {
 // Libs
 require_once('libs/fdebug.php');
 require_once('libs/frequest.php');
+require_once('libs/fstring.php');
 require_once('libs/fsession.php');
 require_once('libs/fxml.php');
 require_once('libs/smarty/Smarty.class.php');

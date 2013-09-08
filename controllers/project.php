@@ -8,7 +8,7 @@ class Project extends Controller {
 
     public function start() {
         $this->breadcrumbs[] = array('Novo Projeto', 'project/start');
-        
+
         $arrAllLangs = array();
         $xml = simplexml_load_file(APPLICATION_PATH . 'locales.xml');
         foreach($xml->locale as $locale) {
@@ -85,7 +85,7 @@ class Project extends Controller {
             }
 
             $this->session->setAttribute('des-caminho-xml', APPLICATION_PATH . "projects/{$project}/project.xml");
-            
+
             $arrTerms = array();
             if($xml->terms && count($xml->terms->term)) {
                 foreach($xml->terms->term as $xmlTerm) {
@@ -95,7 +95,7 @@ class Project extends Controller {
                     }
                 }
             }
-            
+
             $this->session->setAttribute('arr-terms', $arrTerms);
             header('location: ' . APPLICATION_URL . 'project/view');
         }
@@ -116,7 +116,7 @@ class Project extends Controller {
                 $this->session->getAttribute('arr-terms') && is_array($this->session->getAttribute('arr-terms')) ?
                     $this->session->getAttribute('arr-terms') : array()
             );
-        
+
         $arrAllLangs = array();
         $xml = simplexml_load_file(APPLICATION_PATH . 'locales.xml');
         foreach($xml->locale as $locale) {
@@ -158,18 +158,24 @@ class Project extends Controller {
         $ignore = htmlspecialchars(urldecode(stripcslashes($this->request->post->offsetGet('ignore'))));
 
         require_once(APPLICATION_PATH . 'libs/poutils.php');
+
         $dir = $this->session->getAttribute('des-caminho');
         $langs = $this->session->getAttribute('arr-langs');
+        $pathXml = $this->session->getAttribute('des-caminho-xml');
+        $nomProjeto = $this->session->getAttribute('nom-projeto');
+        $basePath = $this->session->getAttribute('des-caminho');
 
         $poUtils = new POutils($dir, $patterns, $ignore);
-        
+
         $poUtils->startSearch();
         $terms = $poUtils->getTerms();
-        
-        // criar po das langs existentes
-        
+
+        foreach($langs as $lang) {
+            $poUtils->createPoFile($nomProjeto, $basePath, $lang);
+        }
+
         $xml = new FXml();
-        if($xml->createTerms($this->session->getAttribute('des-caminho-xml'), $terms)) {
+        if($xml->createTerms($pathXml, $terms)) {
             $this->session->setAttribute('arr-terms', $poUtils->getTerms());
             echo json_encode(array('result' => '1', 'total' => count($poUtils->getTerms())));
         }else{
@@ -183,14 +189,15 @@ class Project extends Controller {
 
         $this->view->assign('lang', $this->request->get->offsetGet('lang'));
         $this->view->assign('terms', $this->session->getAttribute('arr-terms'));
-        
+
         $arrAllLangs = array();
         $xml = simplexml_load_file(APPLICATION_PATH . 'locales.xml');
         foreach($xml->locale as $locale) {
             $arrAllLangs[(string)$locale->codes->code->standard->representation] = (string)$locale->englishName;
         }
-        
+
         $this->view->assign('arrAllLangs', $arrAllLangs);
+        $this->view->assign('nomProjeto', FString::removeSpecialChars($this->session->getAttribute('nom-projeto')));
 
         $this->displayTemplate('view-lang.phtml');
     }
@@ -217,20 +224,18 @@ class Project extends Controller {
                         $termsOrigem .= "{$_origem}\n";
 
                         $strUrlParams = rawurlencode($_origem);
-                        //$url = "http://translate.google.com/?sl=". $origem ."&tl=". $destino ."&js=n&prev=_t&hl=it&ie=UTF-8&eotf=1&text=". $strUrlParams ."";
-                        
                         $url = "https://translate.google.com/translate_a/t?client=t&sl={$origem}&tl={$destino}&hl=pt-BR&ie=UTF-8&oe=UTF-8&prev=btn&ssel=4&tsel=4&q={$strUrlParams}";
-                        
+
                         $curl = curl_init($url);
                         curl_setopt($curl, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
                         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
                         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
                         $html = curl_exec($curl);
                         curl_close($curl);
-                        
+
                         error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
                         ini_set('display_errors', false);
-                        
+
                         $translate = explode('"',substr($html, 4));
                         $_destino = array_shift($translate);
 
@@ -243,5 +248,46 @@ class Project extends Controller {
         }
 
         echo json_encode(array('terms' => $terms));
+    }
+
+    public function exportPo() {
+        $project = $this->request->get->offsetGet('project');
+        $lang = $this->request->get->offsetGet('lang');
+
+        $file = APPLICATION_PATH . "projects/{$project}/{$lang}.po";
+
+        if (file_exists($file)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename=' . basename($file));
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file));
+            readfile($file);
+            exit;
+        }
+    }
+
+    public function exportMo() {
+        $project = $this->request->get->offsetGet('project');
+        $lang = $this->request->get->offsetGet('lang');
+
+        require_once(APPLICATION_PATH . 'libs/poutils.php');
+        $file = POutils::createMoFile($project, $lang);
+
+        if (file_exists($file)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename=' . basename($file));
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file));
+            readfile($file);
+            exit;
+        }
     }
 }

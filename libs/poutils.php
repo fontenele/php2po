@@ -9,7 +9,11 @@ class POutils {
 
 	public function __construct($directory, $patterns = null, $ignoreDirs = null) {
 		if(is_dir($directory)) {
-			$this->dir = dir(substr($directory, 0, strlen($directory) - 1));
+            if(in_array(substr($directory, strlen($directory) - 1), array('/', '\\'))) {
+                $directory = substr($directory, 0, strlen($directory) - 1);
+            }
+
+			$this->dir = dir($directory);
 		}
         if($patterns) {
             $this->setPatterns($patterns);
@@ -18,11 +22,11 @@ class POutils {
             $this->setIgnoreDirs($ignoreDirs);
         }
 	}
-    
+
     public function setPatterns($patterns) {
         $this->patterns = is_array($patterns) ? $patterns : array_filter(explode("\n",$patterns), 'strlen');
     }
-    
+
     public function setIgnoreDirs($ignoreDirs) {
         $this->ignoreDirs = is_array($ignoreDirs) ? $ignoreDirs : array_filter(explode("\n",$ignoreDirs), 'strlen');
     }
@@ -63,10 +67,10 @@ class POutils {
 
 		preg_match_all('/(?P<tudo>\$this\s*->\s*translate\s*\(\s*("|\')(?P<palavra>.*?)("|\')\s*\))/sm', $content, $result);
 		$arLinhas = preg_split('/(\r\n|\n|\r)/', $content);
-		
+
 		$terms = $result['palavra'];
 		$toFindInFile = $result['tudo'];
-        
+
 		foreach($arLinhas as $i => $conteudoLinha) {
 			$linha = $i + 1;
 			foreach($toFindInFile as $j => $match) {
@@ -77,24 +81,33 @@ class POutils {
 		}
 	}
 
-    public function createPoFile($project, $lang) {
-        $tmpFile = md5(date('Y-m-d-h:i:s'));
-        $output = '/tmp/output.po';
+    public function createPoFile($project, $basePath, $lang) {
+        $tmpNomProjeto = FString::removeSpecialChars($project);
+        $output = APPLICATION_PATH . "projects/{$tmpNomProjeto}/{$lang}.po";
         $res = fopen($output, 'w');
+
+
+        fwrite($res, "#\n");
+        fwrite($res, "# CREATED BY PHP2PO\n");
+        fwrite($res, "# SOURCE CODE https://github.com/fontenele/php2po\n");
+        fwrite($res, "#\n");
+        fwrite($res, "#\n");
+        fwrite($res, "# PROJECT: {$project}\n");
+        fwrite($res, "# LANG: {$lang}\n");
+        fwrite($res, "#\n");
 
         fwrite($res, "msgid \"\"\r");
         fwrite($res, "msgstr \"\"\r");
 
-        fwrite($res, '"Project-Id-Version: FS 1.0\n"' . "\n"); // Nome projeto
-        fwrite($res, '"POT-Creation-Date: 2013-03-19 22:45-0300\n"' . "\n"); // Data criaçao
+        fwrite($res, '"Project-Id-Version: ' . $project . '\n"' . "\n"); // Nome projeto
+        fwrite($res, '"POT-Creation-Date: ' . date('Y-m-d h:i:s') . '\n"' . "\n"); // Data criaçao
         fwrite($res, '"PO-Revision-Date: '. date('Y-m-d h:i:s') . '\n"' . "\n"); // Data revisao
         fwrite($res, '"MIME-Version: 1.0\n"' . "\n");
         fwrite($res, '"Content-Type: text/plain; charset=UTF-8\n"' . "\n");
         fwrite($res, '"Content-Transfer-Encoding: 8bit\n"' . "\n");
-        fwrite($res, '"X-Generator: php2po\n"' . "\n");
-        fwrite($res, '"X-Poedit-KeywordsList: translate\n"' . "\n");
-        fwrite($res, '"X-Poedit-Basepath: /Applications/XAMPP/htdocs/fs/app/module/Album\n"' . "\n"); // BaseDir
-        fwrite($res, '"X-Poedit-SourceCharset: UTF-8\n"' . "\n\n");
+        fwrite($res, '"X-Generator: https://github.com/fontenele/php2po\n"' . "\n");
+        fwrite($res, '"X-Basepath: ' . $basePath . '\n"' . "\n"); // BaseDir
+        fwrite($res, '"X-SourceCharset: UTF-8\n"' . "\n\n");
 
         foreach($this->getTerms() as $_term => $files) {
             foreach($files as $_file => $lines) {
@@ -111,9 +124,11 @@ class POutils {
         return $output;
     }
 
-    public function createMoFile($poFile) {
-        $output = '/tmp/output.mo';
-
+    public static function createMoFile($project, $lang) {
+        $tmpNomProjeto = FString::removeSpecialChars($project);
+        $output = APPLICATION_PATH . "projects/{$tmpNomProjeto}/{$lang}.mo";
+        $poFile = APPLICATION_PATH . "projects/{$tmpNomProjeto}/{$lang}.po";
+        
         require("msgfmt-functions.php");
 
         if(file_exists($poFile)) {
