@@ -91,7 +91,11 @@ class Project extends Controller {
                 foreach($xml->terms->term as $xmlTerm) {
                     $arrTerms[(string)$xmlTerm->desc] = array();
                     foreach($xmlTerm->files->file as $xmlFile) {
-                        $arrTerms[(string)$xmlTerm->desc][(string)$xmlFile->attributes()->name][(string)$xmlFile->attributes()->line] = (string)$xmlFile->attributes()->line;
+                        $name = (string)$xmlTerm->desc;
+                        $index = md5($name);
+
+                        $arrTerms[$index]['name'] = $name;
+                        $arrTerms[$index]['files'][(string)$xmlFile->attributes()->name][(string)$xmlFile->attributes()->line] = (string)$xmlFile->attributes()->line;
                     }
                 }
             }
@@ -176,8 +180,8 @@ class Project extends Controller {
 
         $xml = new FXml();
         if($xml->createTerms($pathXml, $terms)) {
-            $this->session->setAttribute('arr-terms', $poUtils->getTerms());
-            echo json_encode(array('result' => '1', 'total' => count($poUtils->getTerms())));
+            $this->session->setAttribute('arr-terms', $terms);
+            echo json_encode(array('result' => '1', 'total' => count($terms)));
         }else{
             echo json_encode(array('result' => '2'));
         }
@@ -187,8 +191,13 @@ class Project extends Controller {
         $this->breadcrumbs[] = array($this->session->getAttribute('nom-projeto'), 'project/view');
         $this->breadcrumbs[] = array('Tradução - ' . $this->request->get->offsetGet('lang'), 'project/viewLang');
 
-        $this->view->assign('lang', $this->request->get->offsetGet('lang'));
+        $lang = $this->request->get->offsetGet('lang');
+
+        $this->view->assign('langDefault', $this->session->getAttribute('frk-idioma-default'));
+        $this->view->assign('lang', $lang);
         $this->view->assign('terms', $this->session->getAttribute('arr-terms'));
+        $arrTranslateds = $this->session->getAttribute('arr-translateds');
+        $this->view->assign('arrTranslateds', isset($arrTranslateds[$lang]) ? $arrTranslateds[$lang] : array());
 
         $arrAllLangs = array();
         $xml = simplexml_load_file(APPLICATION_PATH . 'locales.xml');
@@ -203,7 +212,7 @@ class Project extends Controller {
     }
 
     public function googleAll() {
-        $terms = array();
+        $terms = $translateds = array();
         parse_str($this->request->post->offsetGet('terms'), $terms);
 
         $origem = $this->request->post->offsetGet('origem');
@@ -213,39 +222,43 @@ class Project extends Controller {
         $j = 0;
 
         foreach($terms as $_term => $_val) {
-            if(strstr($_term, 'term_origin_')) {
-                $id = (int)str_replace('term_origin_', '', $_term);
+            if(substr($_term, 0, 2) == 't_') {
+                $id = substr($_term, 2);
 
-                if($j%2 == 0) {
-                    $_origem = $_val;
-                    $_destino = $terms['term_translate_' . $id];
+                $_origem = $terms[$id];
+                $_destino = $_val;
 
-                    if(!$_destino) {
-                        $termsOrigem .= "{$_origem}\n";
+                if(!$_destino) {
+                    $termsOrigem .= "{$_origem}\n";
 
-                        $strUrlParams = rawurlencode($_origem);
-                        $url = "https://translate.google.com/translate_a/t?client=t&sl={$origem}&tl={$destino}&hl=pt-BR&ie=UTF-8&oe=UTF-8&prev=btn&ssel=4&tsel=4&q={$strUrlParams}";
+                    $strUrlParams = rawurlencode($_origem);
+                    $url = "https://translate.google.com/translate_a/t?client=t&sl={$origem}&tl={$destino}&hl=pt-BR&ie=UTF-8&oe=UTF-8&prev=btn&ssel=4&tsel=4&q={$strUrlParams}";
 
-                        $curl = curl_init($url);
-                        curl_setopt($curl, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
-                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-                        $html = curl_exec($curl);
-                        curl_close($curl);
+                    $curl = curl_init($url);
+                    curl_setopt($curl, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+                    $html = curl_exec($curl);
+                    curl_close($curl);
 
-                        error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
-                        ini_set('display_errors', false);
+                    error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
+                    ini_set('display_errors', false);
 
-                        $translate = explode('"',substr($html, 4));
-                        $_destino = array_shift($translate);
+                    $translate = explode('"',substr($html, 4));
+                    $_destino = array_shift($translate);
 
-                        $terms['term_translate_' . $id] = $_destino;
-                    }
+                    $translateds[$id] = $_destino;
+
+                    $terms['t_' . $id] = $_destino;
                 }
             }
 
             $j++;
         }
+
+        $arrTranslateds = $this->session->getAttribute('arr-translateds');
+        $arrTranslateds[$destino] = $translateds;
+        $this->session->setAttribute('arr-translateds', $arrTranslateds);
 
         echo json_encode(array('terms' => $terms));
     }
@@ -289,5 +302,35 @@ class Project extends Controller {
             readfile($file);
             exit;
         }
+    }
+
+    public function saveTermsLang() {
+        $dir = $this->session->getAttribute('des-caminho');
+        $pathXml = $this->session->getAttribute('des-caminho-xml');
+        $nomProjeto = $this->session->getAttribute('nom-projeto');
+        $basePath = $this->session->getAttribute('des-caminho');
+        $terms = $this->session->getAttribute('arr-terms');
+
+        $lang = $this->request->post->offsetGet('lang');
+        $this->request->post->offsetUnset('lang');
+
+        require_once(APPLICATION_PATH . 'libs/poutils.php');
+        $poUtils = new POutils($dir, null, null, $terms);
+        $poUtils->createPoFile($nomProjeto, $basePath, $lang, (array)$this->request->post);
+
+        $xml = new FXml();
+        /**
+         * salvar no xml as traducoes
+         *
+         * <term>
+         *     <desc>Adicionar Imagem</desc>
+         *     <translations>
+         *         <item lang="en_US">Add Picture</item>
+         *         <item lang="pt_BR">Adicionar Imagem</item>
+         *     </translations>
+         * </term>
+         *
+         * header location
+         */
     }
 }

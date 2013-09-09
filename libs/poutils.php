@@ -7,7 +7,7 @@ class POutils {
     private $patterns = array();
     private $ignoreDirs = array();
 
-	public function __construct($directory, $patterns = null, $ignoreDirs = null) {
+	public function __construct($directory, $patterns = null, $ignoreDirs = null, $terms = array()) {
 		if(is_dir($directory)) {
             if(in_array(substr($directory, strlen($directory) - 1), array('/', '\\'))) {
                 $directory = substr($directory, 0, strlen($directory) - 1);
@@ -20,6 +20,9 @@ class POutils {
         }
         if($ignoreDirs) {
             $this->setIgnoreDirs($ignoreDirs);
+        }
+        if($terms) {
+            $this->terms = $terms;
         }
 	}
 
@@ -75,17 +78,20 @@ class POutils {
 			$linha = $i + 1;
 			foreach($toFindInFile as $j => $match) {
 				if(strstr($conteudoLinha, $match)) {
-                    $this->terms[$terms[$j]][$file][$linha] = $linha;
+                    $name = $terms[$j];
+                    $index = md5($name);
+
+                    $this->terms[$index]['name'] = $name;
+                    $this->terms[$index]['files'][$file][$linha] = $linha;
 				}
 			}
 		}
 	}
 
-    public function createPoFile($project, $basePath, $lang) {
+    public function createPoFile($project, $basePath, $lang, $translations = array()) {
         $tmpNomProjeto = FString::removeSpecialChars($project);
         $output = APPLICATION_PATH . "projects/{$tmpNomProjeto}/{$lang}.po";
         $res = fopen($output, 'w');
-
 
         fwrite($res, "#\n");
         fwrite($res, "# CREATED BY PHP2PO\n");
@@ -109,15 +115,17 @@ class POutils {
         fwrite($res, '"X-Basepath: ' . $basePath . '\n"' . "\n"); // BaseDir
         fwrite($res, '"X-SourceCharset: UTF-8\n"' . "\n\n");
 
-        foreach($this->getTerms() as $_term => $files) {
-            foreach($files as $_file => $lines) {
+        foreach($this->getTerms() as $index => $term) {
+            foreach($term['files'] as $_file => $lines) {
                 foreach($lines as $_line) {
                     fwrite($res, "#: {$_file}:{$_line}" . "\n");
                 }
             }
 
-            fwrite($res, "msgid \"{$_term}\"\n");
-            fwrite($res, "msgstr \"\"\n\n");
+            $translated = isset($translations['t_' . $index]) ? $translations['t_' . $index] : null;
+
+            fwrite($res, "msgid \"{$term['name']}\"\n");
+            fwrite($res, "msgstr \"{$translated}\"\n\n");
         }
 
         fclose($res);
@@ -128,7 +136,7 @@ class POutils {
         $tmpNomProjeto = FString::removeSpecialChars($project);
         $output = APPLICATION_PATH . "projects/{$tmpNomProjeto}/{$lang}.mo";
         $poFile = APPLICATION_PATH . "projects/{$tmpNomProjeto}/{$lang}.po";
-        
+
         require("msgfmt-functions.php");
 
         if(file_exists($poFile)) {

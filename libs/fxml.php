@@ -4,7 +4,7 @@ class FXml {
 
     public function createProject($name, $description, $path, $lang) {
         $xml = <<<XML
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <php2po>
     <project>
         <name>{$name}</name>
@@ -18,7 +18,7 @@ class FXml {
 XML;
 
         $name = FString::removeSpecialChars($name);
-        
+
         if(!is_dir(APPLICATION_PATH . "projects/{$name}")) {
             mkdir(APPLICATION_PATH . "projects/{$name}", 0777, true);
         }
@@ -37,13 +37,12 @@ XML;
 
         $xmlTerms = $xml->terms;
 
-        foreach($terms as $term => $files) {
+        foreach($terms as $index => $term) {
             $xmlTerm = $xmlTerms->addChild('term');
-            $xmlTerm->addChild('desc', $term);
+            $xmlTerm->addChild('desc', $term['name']);
 
             $xmlFiles = $xmlTerm->addChild("files");
-
-            foreach($files as $file => $lines) {
+            foreach($term['files'] as $file => $lines) {
                 foreach($lines as $line) {
                     $xmlFile = $xmlFiles->addChild('file');
                     $xmlFile->addAttribute('name', $file);

@@ -12,11 +12,13 @@ $(document).ready(function() {
                     {origem: $('#frk-lang-origem').val(), destino: $('#frk-lang-destino').val(), terms: $('#frm-table-terms').serialize()},
                     function(data, status) {
                         $('#btn-google-all').html('Traduzir');
+
                         for(i in data.terms) {
-                            if(i.indexOf('term_origin_') >= 0) {
-                                var id = i.replace('term_origin_', '');
-                                eval("var translated = data.terms.term_translate_" + id + ";");
-                                $("input[name=term_translate_" + id + "]").val(translated);
+                            if(i.indexOf('t_') == 0) {
+                                var id = i.substr(2);
+                                var translated = data.terms[i];
+
+                                $("#" + id).val(translated);
                                 $('#mdlGoogleAll').modal('hide');
                             }
                         }

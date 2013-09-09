@@ -19,8 +19,8 @@
             </div>
         </div>
 
-        <form role="form" id="frm-table-terms">
-
+        <form role="form" id="frm-table-terms" action="{$hostPath}project/saveTermsLang" method="post">
+            <input type="hidden" name="lang" value="{$lang}" />
             <table class="table" id="tbl-terms">
                 <thead>
                     <tr>
@@ -35,13 +35,13 @@
                     {foreach from=$terms key=texto item=term}
                         <tr>
                             <td>
-                                <a href="#" data-toggle="tooltip" title="{foreach from=$term key=file item=lines}{$file} {foreach from=$lines item=line} #{$line}{/foreach}<br />{/foreach}">{$incTerm}</a>
+                                <a id="term_{$incTerm}" href="#term_{$incTerm++}" data-toggle="tooltip" title="{foreach from=$term.files key=file item=lines}{$file} {foreach from=$lines item=line} #{$line}{/foreach}<br />{/foreach}"><span class="glyphicon glyphicon-info-sign"></span></a>
                             </td>
                             <td class="term">
-                                {$texto} <input type="hidden" name="term_origin_{$incTerm}" value="{$texto}" />
+                                {$term.name} <input type="hidden" name="{$texto}" value="{$term.name}" />
                             </td>
                             <td>
-                                <input name="term_translate_{$incTerm++}" class="form-control" type="text" />
+                                <input name="t_{$texto}" id="{$texto}" {if isset($arrTranslateds.$texto)}value="{$arrTranslateds.$texto}"{/if} class="form-control" type="text" />
                             </td>
                             <td>
                                 <div class="btn-group">
@@ -87,7 +87,7 @@
                         <select id="frk-lang-origem" name="frk-lang-origem" class="form-control">
                             <option value="">Selecione</option>
                             {foreach from=$arrAllLangs item=label key=key}
-                                <option value="{$key}">{$label}</option>
+                                <option {if $key == $langDefault}selected{/if} value="{$key}">{$label}</option>
                             {/foreach}
                         </select>
                     </div>
@@ -96,7 +96,7 @@
                         <select id="frk-lang-destino" name="frk-lang-destino" class="form-control">
                             <option value="">Selecione</option>
                             {foreach from=$arrAllLangs item=label key=key}
-                                <option value="{$key}">{$label}</option>
+                                <option {if $key == $lang}selected{/if} value="{$key}">{$label}</option>
                             {/foreach}
                         </select>
                     </div>
