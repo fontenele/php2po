@@ -32,10 +32,12 @@ XML;
         }
     }
 
-    public function createTerms($filename, $terms) {
+    public function createTerms($filename, $terms, $translations = array()) {
         $xml = simplexml_load_file($filename);
 
+        $xml->terms = new SimpleXMLElement('<terms />');
         $xmlTerms = $xml->terms;
+        $langs = array_keys($translations);
 
         foreach($terms as $index => $term) {
             $xmlTerm = $xmlTerms->addChild('term');
@@ -49,8 +51,32 @@ XML;
                     $xmlFile->addAttribute('line', $line);
                 }
             }
+
+            if($translations) {
+                $xmlTranslations = $xmlTerm->addChild("translations");
+
+                $_index = md5($term['name']);
+                foreach($langs as $lang) {
+                    if(isset($translations[$lang][$index])) {
+                        $xmlLangItem = $xmlTranslations->addChild('item', $translations[$lang][$index]);
+                        $xmlLangItem->addAttribute('lang', $lang);
+                    }
+                }
+            }
         }
 
+
+        return $xml->asXML($filename);
+    }
+
+    public function setLangs($filename, $langs = array()) {
+        $xml = simplexml_load_file($filename);
+
+        $xml->langs = new SimpleXMLElement('<langs />');
+        $xmlLangs = $xml->langs;
+        foreach($langs as $lang) {
+            $xmlLangItem = $xmlLangs->addChild('lang', $lang);
+        }
 
         return $xml->asXML($filename);
     }

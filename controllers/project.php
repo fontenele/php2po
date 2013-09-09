@@ -80,16 +80,20 @@ class Project extends Controller {
                 $this->session->setAttribute('des-projeto', (string)$_project->description);
                 $this->session->setAttribute('des-caminho', (string)$_project->path);
                 $this->session->setAttribute('frk-idioma-default', (string)$_project->lang);
-                $langs = array((string)$_project->lang => (string)$_project->lang);
-                $this->session->setAttribute('arr-langs', $langs);
-            }
 
+            }
+            $langs = array();
+            foreach($xml->xpath('//langs/lang') as $_lang) {
+                $langs[(string)$_lang] = (string)$_lang;
+            }
+            
+            $this->session->setAttribute('arr-langs', $langs);
             $this->session->setAttribute('des-caminho-xml', APPLICATION_PATH . "projects/{$project}/project.xml");
 
-            $arrTerms = array();
+            $arrTerms = $arrTranslateds = array();
+
             if($xml->terms && count($xml->terms->term)) {
                 foreach($xml->terms->term as $xmlTerm) {
-                    $arrTerms[(string)$xmlTerm->desc] = array();
                     foreach($xmlTerm->files->file as $xmlFile) {
                         $name = (string)$xmlTerm->desc;
                         $index = md5($name);
@@ -97,10 +101,19 @@ class Project extends Controller {
                         $arrTerms[$index]['name'] = $name;
                         $arrTerms[$index]['files'][(string)$xmlFile->attributes()->name][(string)$xmlFile->attributes()->line] = (string)$xmlFile->attributes()->line;
                     }
+                    foreach($xmlTerm->translations->item as $xmlTranslated) {
+                        $name = (string)$xmlTerm->desc;
+                        $index = md5($name);
+
+                        $lang = (string)$xmlTranslated->attributes()->lang;
+                        $translated = (string)$xmlTranslated;
+                        $arrTranslateds[$lang][$index] = $translated;
+                    }
                 }
             }
 
             $this->session->setAttribute('arr-terms', $arrTerms);
+            $this->session->setAttribute('arr-translateds', $arrTranslateds);
             header('location: ' . APPLICATION_URL . 'project/view');
         }
     }
@@ -135,6 +148,7 @@ class Project extends Controller {
         if($this->request->get->offsetExists('lang')) {
             $langs = $this->session->getAttribute('arr-langs');
             $newLang = trim($this->request->get->offsetGet('lang'));
+            $pathXml = $this->session->getAttribute('des-caminho-xml');
             $status = false;
 
             switch(true) {
@@ -148,7 +162,11 @@ class Project extends Controller {
                 break;
             }
 
+
             if($status) {
+                $xml = new FXml();
+                $xml->setLangs($pathXml, $langs);
+
                 $this->session->setAttribute('arr-langs', $langs);
                 echo json_encode(array('result' => '1'));
             }else{
@@ -319,18 +337,21 @@ class Project extends Controller {
         $poUtils->createPoFile($nomProjeto, $basePath, $lang, (array)$this->request->post);
 
         $xml = new FXml();
-        /**
-         * salvar no xml as traducoes
-         *
-         * <term>
-         *     <desc>Adicionar Imagem</desc>
-         *     <translations>
-         *         <item lang="en_US">Add Picture</item>
-         *         <item lang="pt_BR">Adicionar Imagem</item>
-         *     </translations>
-         * </term>
-         *
-         * header location
-         */
+        $translateds = array();
+
+        foreach((array)$this->request->post as $_term => $_val) {
+            if(substr($_term, 0, 2) == 't_') {
+                $index = substr($_term, 2);
+                $translateds[$index] = $_val;
+            }
+        }
+
+        $arrTranslateds = $this->session->getAttribute('arr-translateds');
+        if(!is_array($arrTranslateds)) { $arrTranslateds = array(); }
+        $arrTranslateds[$lang] = $translateds;
+        $this->session->setAttribute('arr-translateds', $arrTranslateds);
+
+        $xml->createTerms($pathXml, $terms, $arrTranslateds);
+        header('location: ' . APPLICATION_URL . 'project/view');
     }
 }
