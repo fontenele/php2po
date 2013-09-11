@@ -40,7 +40,7 @@ abstract class Controller {
         $this->view->setTemplateDir(APPLICATION_PATH . 'views');
 
         $this->registerDefaultViewVars();
-        
+
         $this->init();
     }
 
@@ -49,6 +49,9 @@ abstract class Controller {
     protected function registerDefaultViewVars() {
         $this->view->assign('fullPath', APPLICATION_PATH);
         $this->view->assign('hostPath', APPLICATION_URL);
+
+        $view = new View();
+        $this->view->assign('this', $view);
 
         if(file_exists(APPLICATION_PATH . "js/{$this->request->controller}/{$this->request->action}.js")) {
             $this->jsFiles[] = "{$this->request->controller}/{$this->request->action}.js";
@@ -63,11 +66,17 @@ abstract class Controller {
     public function displayTemplate($template) {
         if($this->view->templateExists($template)) {
             $content = $this->view->fetch($template);
+
             $this->view->assign('php2poBreadCrumbs', $this->breadcrumbs);
             $this->view->assign('php2poContent', $content);
             $this->view->assign('php2poJsFiles', $this->jsFiles);
             $this->view->assign('php2poCssFiles', $this->cssFiles);
+
             $this->view->display('template.phtml');
         }
+    }
+
+    public function translate($string) {
+        return _($string) ? _($string) : $string;
     }
 }

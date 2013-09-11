@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<php2po>
+    <project>
+        <name>php2po</name>
+        <description>Create and edit PO and MO files</description>
+        <path>/Applications/XAMPP/htdocs/php2po</path>
+        <lang>pt_BR</lang>
+    </project>
+    <langs><lang>pt_BR</lang><lang>en_US</lang><lang>es_ES</lang></langs>
+    <terms><term><desc>Escolha uma opção</desc><files><file name="/Applications/XAMPP/htdocs/php2po/views/home.phtml" line="5"/></files><translations><item lang="en_US">Choose an option</item><item lang="es_ES">Elija una opción</item></translations></term><term><desc>Novo</desc><files><file name="/Applications/XAMPP/htdocs/php2po/views/home.phtml" line="8"/></files><translations><item lang="en_US">New</item><item lang="es_ES">Nuevo</item></translations></term><term><desc>Importar</desc><files><file name="/Applications/XAMPP/htdocs/php2po/views/home.phtml" line="9"/></files><translations><item lang="en_US">Import</item><item lang="es_ES">Importar</item></translations></term></terms>
+</php2po>

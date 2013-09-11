@@ -32,11 +32,6 @@ class FRequest extends ArrayObject {
         $this->time = date('Y-m-d h:i:s', $_SERVER['REQUEST_TIME']);
         $this->timestamp = $_SERVER['REQUEST_TIME'];
 
-        $host_path = substr($_SERVER['SCRIPT_FILENAME'], 0, strlen($_SERVER['SCRIPT_FILENAME']) - strpos(strrev($_SERVER['SCRIPT_FILENAME']), "/"));
-        $http_path = "http://" . $_SERVER['HTTP_HOST'] . substr($_SERVER['PHP_SELF'], 0, strlen($_SERVER['PHP_SELF']) - strpos(strrev($_SERVER['PHP_SELF']), "/"));
-        define('APPLICATION_PATH', $host_path);
-        define('APPLICATION_URL', $http_path);
-
         $this->get = new ArrayObject();
         $this->post = new ArrayObject();
         $this->files = new ArrayObject();

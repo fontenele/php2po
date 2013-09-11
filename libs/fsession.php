@@ -38,4 +38,13 @@ class FSession {
     public function getAllAttributes() {
         return $_SESSION[self::NAME];
     }
+
+    /**
+     * Clear all Session attributes
+     */
+    public function clear() {
+        $lang = $this->getAttribute('php2poLang');
+        $_SESSION[self::NAME] = array();
+        $this->setAttribute('php2poLang', $lang);
+    }
 }

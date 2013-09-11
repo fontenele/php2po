@@ -7,7 +7,13 @@ class Home extends Controller {
     }
 
     public function index() {
-        session_destroy();
+        if($this->request->get->offsetExists('lang')) {
+            $this->session->setAttribute('php2poLang', $this->request->get->offsetGet('lang'));
+            header('location: ' . APPLICATION_URL);
+            exit;
+        }
+
+        $this->session->clear();
         $this->displayTemplate('home.phtml');
     }
 }

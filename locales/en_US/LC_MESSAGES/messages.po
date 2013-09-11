@@ -1,0 +1,30 @@
+#
+# CREATED BY PHP2PO
+# SOURCE CODE https://github.com/fontenele/php2po
+#
+#
+# PROJECT: php2po
+# LANG: en_US
+#
+msgid ""msgstr """Project-Id-Version: php2po\n"
+"POT-Creation-Date: 2013-09-11 06:25:48\n"
+"PO-Revision-Date: 2013-09-11 06:25:48\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: https://github.com/fontenele/php2po\n"
+"X-Basepath: /Applications/XAMPP/htdocs/php2po\n"
+"X-SourceCharset: UTF-8\n"
+
+#: /Applications/XAMPP/htdocs/php2po/views/home.phtml:5
+msgid "Escolha uma opção"
+msgstr "Choose an option"
+
+#: /Applications/XAMPP/htdocs/php2po/views/home.phtml:8
+msgid "Novo"
+msgstr "New"
+
+#: /Applications/XAMPP/htdocs/php2po/views/home.phtml:9
+msgid "Importar"
+msgstr "Import"
+
