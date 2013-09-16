@@ -2,7 +2,7 @@
 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12  col-lg-offset-1 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <span class="titulo">Tradução - <strong>{$lang}</strong></span>
+            <span class="titulo">{$this->translate('Tradução - ')} <strong>{$lang}</strong></span>
             <div class="pull-right">
                 <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></button>
@@ -10,10 +10,10 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a data-toggle="modal" href="#mdlGoogleAll"><span class="glyphicon glyphicon-globe"></span> Tradução automática</a></li>
+                        <li><a data-toggle="modal" href="#mdlGoogleAll"><span class="glyphicon glyphicon-globe"></span> {$this->translate('Tradução automática')}</a></li>
                         <li class="divider"></li>
-                        <li><a href="#" id="btn-save-po"><span class="glyphicon glyphicon-download-alt"></span> Exportar .PO</a></li>
-                        <li><a href="#" id="btn-save-mo"><span class="glyphicon glyphicon-download-alt"></span> Exportar .MO</a></li>
+                        <li><a href="#" id="btn-save-po"><span class="glyphicon glyphicon-download-alt"></span> {$this->translate('Exportar')} .PO</a></li>
+                        <li><a href="#" id="btn-save-mo"><span class="glyphicon glyphicon-download-alt"></span> {$this->translate('Exportar')} .MO</a></li>
                     </ul>
                 </div>
             </div>
@@ -25,9 +25,9 @@
                 <thead>
                     <tr>
                         <th width="4%">#</th>
-                        <th width="43%">Texto</th>
-                        <th width="42%">Tradução</th>
-                        <th width="15%">Opções</th>
+                        <th width="43%">{$this->translate('Texto')}</th>
+                        <th width="42%">{$this->translate('Tradução')}</th>
+                        <th width="15%">{$this->translate('Opções')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,7 +50,7 @@
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a><span class="glyphicon glyphicon-globe"></span> Traduzir Item</a></li>
+                                        <li><a><span class="glyphicon glyphicon-globe"></span> {$this->translate('Traduzir Item')}</a></li>
                                     </ul>
                                 </div>
                             </td>
@@ -60,7 +60,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="4">
-                            <button class='btn btn-default pull-right'><span class="glyphicon glyphicon-save"></span> Salvar</button>
+                            <button class='btn btn-default pull-right'><span class="glyphicon glyphicon-save"></span> {$this->translate('Salvar')}</button>
                         </td>
                     </tr>
                 </tfoot>
@@ -77,24 +77,24 @@
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Google Tradutor - Traduzir tudo</h4>
+                <h4 class="modal-title">{$this->translate('Google Tradutor - Traduzir tudo')}</h4>
             </div>
 
             <div class="modal-body">
                 <form role="form" method="post">
                     <div class="form-group">
-                        <label>Idioma Origem</label>
+                        <label>{$this->translate('Idioma Origem')}</label>
                         <select id="frk-lang-origem" name="frk-lang-origem" class="form-control">
-                            <option value="">Selecione</option>
+                            <option value="">{$this->translate('Selecione')}</option>
                             {foreach from=$arrAllLangs item=label key=key}
                                 <option {if $key == $langDefault}selected{/if} value="{$key}">{$label}</option>
                             {/foreach}
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Idioma Destino</label>
+                        <label>{$this->translate('Idioma Destino')}</label>
                         <select id="frk-lang-destino" name="frk-lang-destino" class="form-control">
-                            <option value="">Selecione</option>
+                            <option value="">{$this->translate('Selecione')}</option>
                             {foreach from=$arrAllLangs item=label key=key}
                                 <option {if $key == $lang}selected{/if} value="{$key}">{$label}</option>
                             {/foreach}
@@ -104,8 +104,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                <button type="button" id="btn-google-all" class="btn btn-primary">Traduzir</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{$this->translate('Fechar')}</button>
+                <button type="button" id="btn-google-all" class="btn btn-primary">{$this->translate('Traduzir')}</button>
             </div>
 
         </div>

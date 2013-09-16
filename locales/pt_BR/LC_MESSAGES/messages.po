@@ -7,14 +7,34 @@
 # LANG: pt_BR
 #
 msgid ""msgstr """Project-Id-Version: php2po\n"
-"POT-Creation-Date: 2013-09-11 06:23:30\n"
-"PO-Revision-Date: 2013-09-11 06:23:30\n"
+"POT-Creation-Date: 2013-09-16 03:17:38\n"
+"PO-Revision-Date: 2013-09-16 03:17:38\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: https://github.com/fontenele/php2po\n"
 "X-Basepath: /Applications/XAMPP/htdocs/php2po\n"
 "X-SourceCharset: UTF-8\n"
+
+#: /Applications/XAMPP/htdocs/php2po/controllers/home.php:6
+#: /Applications/XAMPP/htdocs/php2po/controllers/project.php:6
+msgid "Principal"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/controllers/project.php:10
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:5
+msgid "Novo Projeto"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/controllers/project.php:46
+#: /Applications/XAMPP/htdocs/php2po/views/import.phtml:5
+msgid "Importar Projeto"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/controllers/project.php:210
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:5
+msgid "Tradução - "
+msgstr ""
 
 #: /Applications/XAMPP/htdocs/php2po/views/home.phtml:5
 msgid "Escolha uma opção"
@@ -25,6 +45,134 @@ msgid "Novo"
 msgstr ""
 
 #: /Applications/XAMPP/htdocs/php2po/views/home.phtml:9
+#: /Applications/XAMPP/htdocs/php2po/views/import.phtml:31
 msgid "Importar"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/import.phtml:12
+msgid "Abrir arquivo"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/import.phtml:15
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:58
+msgid "Cancelar"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/import.phtml:21
+msgid "Reabrir"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/import.phtml:24
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:31
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:88
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:97
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:48
+msgid "Selecione"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:10
+msgid "Nome"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:16
+msgid "Descrição"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:22
+msgid "Caminho"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:28
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:46
+msgid "Idioma"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:38
+msgid "Criar"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:13
+msgid "Tradução automática"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:15
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:16
+msgid "Exportar"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:28
+msgid "Texto"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:29
+msgid "Tradução"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:30
+msgid "Opções"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:53
+msgid "Traduzir Item"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:63
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:59
+msgid "Salvar"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:80
+msgid "Google Tradutor - Traduzir tudo"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:86
+msgid "Idioma Origem"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:95
+msgid "Idioma Destino"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:107
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:96
+msgid "Fechar"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:108
+msgid "Traduzir"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:8
+msgid "Idiomas"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:16
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:40
+msgid "Novo Idioma"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:17
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:71
+msgid "Buscar Termos"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:19
+msgid "Exportar Tudo"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:76
+msgid "Diretório"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:80
+msgid "Padrões"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:87
+msgid "Ignorar"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:97
+msgid "Buscar"
 msgstr ""
 

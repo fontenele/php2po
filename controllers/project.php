@@ -3,11 +3,11 @@
 class Project extends Controller {
 
     public function init() {
-        $this->breadcrumbs[] = array('Principal', 'home');
+        $this->breadcrumbs[] = array($this->translate('Principal'), 'home');
     }
 
     public function start() {
-        $this->breadcrumbs[] = array('Novo Projeto', 'project/start');
+        $this->breadcrumbs[] = array($this->translate('Novo Projeto'), 'project/start');
 
         $arrAllLangs = array();
         $xml = simplexml_load_file(APPLICATION_PATH . 'locales.xml');
@@ -43,7 +43,7 @@ class Project extends Controller {
     }
 
     public function import() {
-        $this->breadcrumbs[] = array('Importar Projeto', 'project/import');
+        $this->breadcrumbs[] = array($this->translate('Importar Projeto'), 'project/import');
 
         $dir = dir(APPLICATION_PATH . 'projects');
         $projects = array();
@@ -207,7 +207,7 @@ class Project extends Controller {
 
     public function viewLang() {
         $this->breadcrumbs[] = array($this->session->getAttribute('nom-projeto'), 'project/view');
-        $this->breadcrumbs[] = array('Tradução - ' . $this->request->get->offsetGet('lang'), 'project/viewLang');
+        $this->breadcrumbs[] = array($this->translate('Tradução - ') . ' ' .$this->request->get->offsetGet('lang'), 'project/viewLang');
 
         $lang = $this->request->get->offsetGet('lang');
 

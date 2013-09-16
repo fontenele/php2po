@@ -2,33 +2,33 @@
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Importar Projeto</h3>
+                <h3 class="panel-title">{$this->translate('Importar Projeto')}</h3>
             </div>
             <div class="panel-body">
                 <form action="{$hostPath}project/importSave" role="form" method="post" class="form-horizontal" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="des-caminho-xml" class="col-lg-2 control-label">XML</label>
                         <div class="col-lg-10">
-                            <button class="btn btn-default" id="des-caminho-xml_file">Abrir arquivo</button>
+                            <button class="btn btn-default" id="des-caminho-xml_file">{$this->translate('Abrir arquivo')}</button>
                             <input type="file" name="des-caminho-xml" id="des-caminho-xml" />
                             <p class="form-control-static" id="des-caminho-xml_aux">
-                                <strong></strong> <button class="btn btn-danger cancel">Cancelar</button>
+                                <strong></strong> <button class="btn btn-danger cancel">{$this->translate('Cancelar')}</button>
                             </p>
                         </div>
                     </div>
                     <div class="center"><strong>ou</strong></div><br />
                     <div class="form-group">
-                        <label for="frk-project" class="col-lg-2 control-label">Reabrir</label>
+                        <label for="frk-project" class="col-lg-2 control-label">{$this->translate('Reabrir')}</label>
                         <div class="col-lg-10">
                             <select required id="frk-project" name="frk-project" class="form-control">
-                                <option value="">Selecione</option>
+                                <option value="">{$this->translate('Selecione')}</option>
                                 {foreach from=$projects item=project}
                                     <option value="{$project}">{$project}</option>
                                 {/foreach}
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-chevron-down"></span> Importar</button>
+                    <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-chevron-down"></span> {$this->translate('Importar')}</button>
                 </form>
             </div>
         </div>

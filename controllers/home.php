@@ -3,7 +3,7 @@
 class Home extends Controller {
 
     public function init() {
-        $this->breadcrumbs[] = array('Principal', 'home');
+        $this->breadcrumbs[] = array($this->translate('Principal'), 'home');
     }
 
     public function index() {

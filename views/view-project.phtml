@@ -5,7 +5,7 @@
         <thead>
             <tr>
                 <th>
-                    <span class="titulo">Idiomas</span>
+                    <span class="titulo">{$this->translate('Idiomas')}</span>
                     <div class="pull-right">
                         <div class="btn-group dropup">
                             <button type="button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></button>
@@ -13,10 +13,10 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a data-toggle="modal" href="#mdlNovoIdioma"><span class="glyphicon glyphicon-plus-sign"></span> Novo Idioma</a></li>
-                                <li><a data-toggle="modal" href="#modalTerms"><span class="glyphicon glyphicon-search"></span> Buscar Termos</a></li>
+                                <li><a data-toggle="modal" href="#mdlNovoIdioma"><span class="glyphicon glyphicon-plus-sign"></span> {$this->translate('Novo Idioma')}</a></li>
+                                <li><a data-toggle="modal" href="#modalTerms"><span class="glyphicon glyphicon-search"></span> {$this->translate('Buscar Termos')}</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-save"></span> Exportar Tudo</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-save"></span> {$this->translate('Exportar Tudo')}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -37,15 +37,15 @@
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Novo Idioma</h4>
+                <h4 class="modal-title">{$this->translate('Novo Idioma')}</h4>
             </div>
 
             <div class="modal-body">
                 <form role="form" method="post">
                     <div class="form-group">
-                        <label>Idioma</label>
+                        <label>{$this->translate('Idioma')}</label>
                         <select id="frk-lang" name="frk-lang" class="form-control">
-                            <option value="">Selecione</option>
+                            <option value="">{$this->translate('Selecione')}</option>
                             {foreach from=$arrAllLangs item=label key=key}
                                 <option value="{$key}">{$label}</option>
                             {/foreach}
@@ -55,8 +55,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" id="btn-save-lang" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{$this->translate('Cancelar')}</button>
+                <button type="button" id="btn-save-lang" class="btn btn-primary">{$this->translate('Salvar')}</button>
             </div>
 
         </div>
@@ -68,23 +68,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Buscar Termos</h4>
+                <h4 class="modal-title">{$this->translate('Buscar Termos')}</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form" method="post">
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Diretório</label>
+                        <label class="col-lg-2 control-label">{$this->translate('Diretório')}</label>
                         <p class="col-lg-10 form-control-static">{$projectDir}</p>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Padrões</label>
+                        <label class="col-lg-2 control-label">{$this->translate('Padrões')}</label>
                         <div class="col-lg-10">
                             <textarea class="form-control" name="txt-patterns" id="txt-patterns" disabled>{foreach from=$patterns item=padrao}{$padrao}
 {/foreach}</textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Ignorar</label>
+                        <label class="col-lg-2 control-label">{$this->translate('Ignorar')}</label>
                         <div class="col-lg-10">
                             <textarea class="form-control" name="txt-ignore-dirs" id="txt-ignore-dirs" placeholder="Diretórios ignorados por quebra de linha">{foreach from=$ignoreDirs item=dir}{$dir}
 {/foreach}</textarea>
@@ -93,8 +93,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                <button type="button" id="btn-search-terms" loading class="btn btn-primary">Buscar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{$this->translate('Fechar')}</button>
+                <button type="button" id="btn-search-terms" loading class="btn btn-primary">{$this->translate('Buscar')}</button>
             </div>
         </div>
     </div>
