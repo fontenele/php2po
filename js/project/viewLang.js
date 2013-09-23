@@ -4,6 +4,11 @@ $(document).ready(function() {
         placement: 'right'
     });
 
+    $('.openGoogleOne').on('click', function() {
+        $('#google-one-term').html($.trim($(this).parent().parent().parent().parent().parent().find('.term').text()));
+        $('#mdlGoogleOne').modal('show');
+    });
+
     $('#btn-google-all').on('click', function() {
         $(this).html('<img src=" ' + hostPath + 'img/loading.gif" />');
         if($('#frk-lang-origem').val() != '' && $('#frk-lang-destino').val() != '') {
@@ -29,11 +34,45 @@ $(document).ready(function() {
         return false;
     });
 
+    $('#btn-google-one').on('click', function() {
+        $(this).html('<img src=" ' + hostPath + 'img/loading.gif" />');
+        if($('#frk-lang-origem').val() != '' && $('#frk-lang-destino').val() != '') {
+
+            $.post(
+                    hostPath + 'project/googleOne',
+                    {origem: $('#frk-lang-origem').val(), destino: $('#frk-lang-destino').val(), term: $.trim($('#google-one-term').text())},
+                    function(data, status) {
+                        $('#btn-google-one').html('Traduzir');
+                        $('#' + data.id).val(data.translated);
+                        $('#mdlGoogleOne').modal('hide');
+                    }
+            ,'json');
+        }
+
+        return false;
+    });
+
     $('#btn-save-po').on('click', function() {
-        var wdw = window.open(hostPath + 'project/exportPo/project/' + project +'/lang/' + lang, 'Exportar ' + lang + '.po');
+        $.post(
+                hostPath + 'project/exportPo',
+                {project: project, lang: lang},
+                function(data, status) {
+                    if(data.status == 'ok') {
+                        // message thats ok
+                    }
+                }
+        ,'json');
     });
 
     $('#btn-save-mo').on('click', function() {
-        var wdw = window.open(hostPath + 'project/exportMo/project/' + project +'/lang/' + lang, 'Exportar ' + lang + '.po');
+        $.post(
+                hostPath + 'project/exportMo',
+                {project: project, lang: lang},
+                function(data, status) {
+                    if(data.status == 'ok') {
+                        // message thats ok
+                    }
+                }
+        ,'json');
     });
 });

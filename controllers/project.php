@@ -23,6 +23,7 @@ class Project extends Controller {
         $this->session->setAttribute('nom-projeto', $this->request->post->offsetGet('nom-projeto'));
         $this->session->setAttribute('des-projeto', $this->request->post->offsetGet('des-projeto'));
         $this->session->setAttribute('des-caminho', $this->request->post->offsetGet('des-caminho'));
+        $this->session->setAttribute('des-caminho-output', $this->request->post->offsetGet('des-caminho-output'));
         $this->session->setAttribute('frk-idioma-default', $this->request->post->offsetGet('frk-idioma-default'));
 
         $xml = new FXml();
@@ -30,6 +31,7 @@ class Project extends Controller {
                 $this->request->post->offsetGet('nom-projeto'),
                 $this->request->post->offsetGet('des-projeto'),
                 $this->request->post->offsetGet('des-caminho'),
+                $this->request->post->offsetGet('des-caminho-output'),
                 $this->request->post->offsetGet('frk-idioma-default')
             );
 
@@ -79,6 +81,7 @@ class Project extends Controller {
                 $this->session->setAttribute('nom-projeto', (string)$_project->name);
                 $this->session->setAttribute('des-projeto', (string)$_project->description);
                 $this->session->setAttribute('des-caminho', (string)$_project->path);
+                $this->session->setAttribute('des-caminho-output', (string)$_project->output);
                 $this->session->setAttribute('frk-idioma-default', (string)$_project->lang);
 
             }
@@ -86,7 +89,7 @@ class Project extends Controller {
             foreach($xml->xpath('//langs/lang') as $_lang) {
                 $langs[(string)$_lang] = (string)$_lang;
             }
-            
+
             $this->session->setAttribute('arr-langs', $langs);
             $this->session->setAttribute('des-caminho-xml', APPLICATION_PATH . "projects/{$project}/project.xml");
 
@@ -125,14 +128,28 @@ class Project extends Controller {
         $this->view->assign('projectDir', $this->session->getAttribute('des-caminho'));
         $this->view->assign('patterns', array('$this->translate()'));
         $this->view->assign('ignoreDirs', array(".", '..', '.svn'));
-        $this->view->assign('arrIdiomas',
-                $this->session->getAttribute('arr-langs') && is_array($this->session->getAttribute('arr-langs')) ?
-                    $this->session->getAttribute('arr-langs') : array()
-            );
-        $this->view->assign('arrTerms',
-                $this->session->getAttribute('arr-terms') && is_array($this->session->getAttribute('arr-terms')) ?
-                    $this->session->getAttribute('arr-terms') : array()
-            );
+
+        $arrIdiomas = $this->session->getAttribute('arr-langs') && is_array($this->session->getAttribute('arr-langs')) ? $this->session->getAttribute('arr-langs') : array();
+        $arrTerms = $this->session->getAttribute('arr-terms') && is_array($this->session->getAttribute('arr-terms')) ? $this->session->getAttribute('arr-terms') : array();
+        $this->view->assign('arrIdiomas', $arrIdiomas);
+        $this->view->assign('arrTerms', $arrTerms);
+
+        $arrTranslateds = $this->session->getAttribute('arr-translateds');
+
+        foreach($arrIdiomas as $idioma) {
+            if(!isset($arrTranslateds[$idioma])) { $arrTranslateds[$idioma] = array(); }
+        }
+
+        // clean if empty translation
+        foreach($arrTranslateds as $idioma => $traducoes) {
+            foreach($traducoes as $id => $value) {
+                if(!trim($value)) {
+                    unset($arrTranslateds[$idioma][$id]);
+                }
+            }
+        }
+
+        $this->view->assign('arrTranslateds', $arrTranslateds);
 
         $arrAllLangs = array();
         $xml = simplexml_load_file(APPLICATION_PATH . 'locales.xml');
@@ -236,9 +253,6 @@ class Project extends Controller {
         $origem = $this->request->post->offsetGet('origem');
         $destino = $this->request->post->offsetGet('destino');
 
-        $termsOrigem = '';
-        $j = 0;
-
         foreach($terms as $_term => $_val) {
             if(substr($_term, 0, 2) == 't_') {
                 $id = substr($_term, 2);
@@ -247,31 +261,15 @@ class Project extends Controller {
                 $_destino = $_val;
 
                 if(!$_destino) {
-                    $termsOrigem .= "{$_origem}\n";
-
-                    $strUrlParams = rawurlencode($_origem);
-                    $url = "https://translate.google.com/translate_a/t?client=t&sl={$origem}&tl={$destino}&hl=pt-BR&ie=UTF-8&oe=UTF-8&prev=btn&ssel=4&tsel=4&q={$strUrlParams}";
-
-                    $curl = curl_init($url);
-                    curl_setopt($curl, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                    curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-                    $html = curl_exec($curl);
-                    curl_close($curl);
-
-                    error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
-                    ini_set('display_errors', false);
+                    $html = $this->searchGoogle($origem, $destino, $_origem);
 
                     $translate = explode('"',substr($html, 4));
                     $_destino = array_shift($translate);
 
                     $translateds[$id] = $_destino;
-
                     $terms['t_' . $id] = $_destino;
                 }
             }
-
-            $j++;
         }
 
         $arrTranslateds = $this->session->getAttribute('arr-translateds');
@@ -281,14 +279,57 @@ class Project extends Controller {
         echo json_encode(array('terms' => $terms));
     }
 
+    public function googleOne() {
+        $origem = $this->request->post->offsetGet('origem');
+        $destino = $this->request->post->offsetGet('destino');
+        $term = $this->request->post->offsetGet('term');
+
+        $translateds = array();
+
+        $html = $this->searchGoogle($origem, $destino, $term);
+
+        $translate = explode('"',substr($html, 4));
+        $_destino = array_shift($translate);
+
+        $arrTranslateds = $this->session->getAttribute('arr-translateds');
+
+        if(!isset($arrTranslateds[$destino])) {
+            $arrTranslateds[$destino] = array();
+        }
+
+        $arrTranslateds[$destino][md5($term)] = $_destino;
+        $this->session->setAttribute('arr-translateds', $arrTranslateds);
+
+        echo json_encode(array('translated' => $_destino, 'id' => md5($term)));
+    }
+
+    protected function searchGoogle($langOri, $langDest, $term) {
+        $strUrlParams = rawurlencode($term);
+        $url = "https://translate.google.com/translate_a/t?client=t&sl={$langOri}&tl={$langDest}&hl=pt-BR&ie=UTF-8&oe=UTF-8&prev=btn&ssel=4&tsel=4&q={$strUrlParams}";
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+        $html = curl_exec($curl);
+        curl_close($curl);
+
+        return $html;
+    }
+
     public function exportPo() {
-        $project = $this->request->get->offsetGet('project');
-        $lang = $this->request->get->offsetGet('lang');
+        $project = $this->request->post->offsetGet('project');
+        $lang = $this->request->post->offsetGet('lang');
 
-        $file = APPLICATION_PATH . "projects/{$project}/{$lang}.po";
+        $input = APPLICATION_PATH . "projects/{$project}/{$lang}.po";
+        $output = $this->session->getAttribute('des-caminho-output') . "/{$lang}.po";
 
-        if (file_exists($file)) {
-            header('Content-Description: File Transfer');
+        if (file_exists($input)) {
+            if(copy($input, $output)) {
+                echo json_encode(array('status' => 'ok'));
+            }
+
+            /*header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename=' . basename($file));
             header('Content-Transfer-Encoding: binary');
@@ -297,19 +338,25 @@ class Project extends Controller {
             header('Pragma: public');
             header('Content-Length: ' . filesize($file));
             readfile($file);
-            exit;
+            exit;*/
         }
     }
 
     public function exportMo() {
-        $project = $this->request->get->offsetGet('project');
-        $lang = $this->request->get->offsetGet('lang');
+        $project = $this->request->post->offsetGet('project');
+        $lang = $this->request->post->offsetGet('lang');
 
         require_once(APPLICATION_PATH . 'libs/poutils.php');
-        $file = POutils::createMoFile($project, $lang);
 
-        if (file_exists($file)) {
-            header('Content-Description: File Transfer');
+        $input = POutils::createMoFile($project, $lang);
+        $output = $this->session->getAttribute('des-caminho-output') . "/{$lang}.mo";
+
+        if (file_exists($input)) {
+            if(copy($input, $output)) {
+                echo json_encode(array('status' => 'ok'));
+            }
+
+            /*header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename=' . basename($file));
             header('Content-Transfer-Encoding: binary');
@@ -318,7 +365,7 @@ class Project extends Controller {
             header('Pragma: public');
             header('Content-Length: ' . filesize($file));
             readfile($file);
-            exit;
+            exit;*/
         }
     }
 

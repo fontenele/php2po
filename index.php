@@ -19,8 +19,6 @@ class Index {
         if (file_exists(APPLICATION_PATH . 'controllers/' . $class . '.php')) {
             require_once(APPLICATION_PATH . 'controllers/' . $class . '.php');
             return true;
-        } else {
-            //xd($class);
         }
     }
 

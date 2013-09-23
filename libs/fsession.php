@@ -42,9 +42,9 @@ class FSession {
     /**
      * Clear all Session attributes
      */
-    public function clear() {
-        $lang = $this->getAttribute('php2poLang');
+    public function clear($clearLang = true) {
+        if(!$clearLang) { $lang = $this->getAttribute('php2poLang'); }
         $_SESSION[self::NAME] = array();
-        $this->setAttribute('php2poLang', $lang);
+        if(!$clearLang) { $this->setAttribute('php2poLang', $lang); }
     }
 }

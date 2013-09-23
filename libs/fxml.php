@@ -2,7 +2,7 @@
 
 class FXml {
 
-    public function createProject($name, $description, $path, $lang) {
+    public function createProject($name, $description, $path, $output, $lang) {
         $xml = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <php2po>
@@ -10,6 +10,7 @@ class FXml {
         <name>{$name}</name>
         <description>{$description}</description>
         <path>{$path}</path>
+        <output>{$output}</output>
         <lang>{$lang}</lang>
     </project>
     <langs></langs>

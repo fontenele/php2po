@@ -25,7 +25,7 @@
         </thead>
         <tbody>
             {foreach from=$arrIdiomas item=idioma}
-                <tr><td><a href="{$hostPath}project/viewLang/lang/{$idioma}">{$idioma}</a> <span class="total">{if count($arrTerms) > 0}<span class="badge">{count($arrTerms)}</span>{/if}</span></td></tr>
+                <tr><td><a href="{$hostPath}project/viewLang/lang/{$idioma}">{$idioma}</a> <span class="total">{if count($arrTerms) > 0}<span class="badge">{count($arrTerms) - count($arrTranslateds.$idioma)}</span>{/if}</span></td></tr>
             {/foreach}
         </tbody>
     </table>

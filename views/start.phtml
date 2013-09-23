@@ -7,26 +7,32 @@
             <div class="panel-body">
                 <form action="{$hostPath}project/startSave" role="form" method="post" class="form-horizontal">
                     <div class="form-group">
-                        <label for="nom-projeto" class="col-lg-2 control-label">{$this->translate('Nome')}</label>
-                        <div class="col-lg-10">
-                            <input type="text" required name="nom-projeto" class="form-control" id="nom-projeto" placeholder="Nome" />
+                        <label for="nom-projeto" class="col-lg-4 control-label">{$this->translate('Nome')}</label>
+                        <div class="col-lg-8">
+                            <input type="text" required name="nom-projeto" class="form-control" id="nom-projeto" placeholder="{$this->translate('Nome')}" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="des-projeto" class="col-lg-2 control-label">{$this->translate('Descrição')}</label>
-                        <div class="col-lg-10">
-                            <textarea placeholder="Descrição" name="des-projeto" class="form-control" id="des-projeto" rows="1"></textarea>
+                        <label for="des-projeto" class="col-lg-4 control-label">{$this->translate('Descrição')}</label>
+                        <div class="col-lg-8">
+                            <textarea placeholder="{$this->translate('Descrição')}" name="des-projeto" class="form-control" id="des-projeto" rows="1"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="des-caminho" class="col-lg-2 control-label">{$this->translate('Caminho')}</label>
-                        <div class="col-lg-10">
-                            <input type="text" required name="des-caminho" class="form-control" id="des-caminho" placeholder="Caminho absoluto" />
+                        <label for="des-caminho" class="col-lg-4 control-label">{$this->translate('Caminho')}</label>
+                        <div class="col-lg-8">
+                            <input type="text" required name="des-caminho" class="form-control" id="des-caminho" placeholder="{$this->translate('Caminho absoluto do projeto')}" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="frk-idioma-default" class="col-lg-2 control-label">{$this->translate('Idioma')}</label>
-                        <div class="col-lg-10">
+                        <label for="des-caminho-output" class="col-lg-4 control-label">{$this->translate('Saída')}</label>
+                        <div class="col-lg-8">
+                            <input type="text" required name="des-caminho-output" class="form-control" id="des-caminho-output" placeholder="{$this->translate('Caminho absoluto de saída')}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="frk-idioma-default" class="col-lg-4 control-label">{$this->translate('Idioma')}</label>
+                        <div class="col-lg-8">
                             <select required name="frk-idioma-default" class="form-control" id="frk-idioma-default">
                                 <option value="">{$this->translate('Selecione')}</option>
                                 {foreach from=$arrAllLangs item=label key=key}

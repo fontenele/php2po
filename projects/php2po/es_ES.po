@@ -7,8 +7,8 @@
 # LANG: es_ES
 #
 msgid ""msgstr """Project-Id-Version: php2po\n"
-"POT-Creation-Date: 2013-09-16 03:18:33\n"
-"PO-Revision-Date: 2013-09-16 03:18:33\n"
+"POT-Creation-Date: 2013-09-22 03:10:38\n"
+"PO-Revision-Date: 2013-09-22 03:10:38\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,12 +26,12 @@ msgstr "Principal"
 msgid "Novo Projeto"
 msgstr "Nuevo Proyecto"
 
-#: /Applications/XAMPP/htdocs/php2po/controllers/project.php:46
+#: /Applications/XAMPP/htdocs/php2po/controllers/project.php:48
 #: /Applications/XAMPP/htdocs/php2po/views/import.phtml:5
 msgid "Importar Projeto"
 msgstr "Importar Proyecto"
 
-#: /Applications/XAMPP/htdocs/php2po/controllers/project.php:210
+#: /Applications/XAMPP/htdocs/php2po/controllers/project.php:213
 #: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:5
 msgid "Tradução - "
 msgstr "Traducción -"
@@ -63,18 +63,22 @@ msgid "Reabrir"
 msgstr "Reabrir"
 
 #: /Applications/XAMPP/htdocs/php2po/views/import.phtml:24
-#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:31
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:37
 #: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:88
 #: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:97
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:130
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:139
 #: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:48
 msgid "Selecione"
 msgstr "Seleccionar"
 
 #: /Applications/XAMPP/htdocs/php2po/views/start.phtml:10
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:12
 msgid "Nome"
 msgstr "Nombre"
 
 #: /Applications/XAMPP/htdocs/php2po/views/start.phtml:16
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:18
 msgid "Descrição"
 msgstr "Descripción"
 
@@ -82,14 +86,38 @@ msgstr "Descripción"
 msgid "Caminho"
 msgstr "Camino"
 
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:24
+msgid "Caminho absoluto do projeto"
+msgstr "Ruta absoluta del proyecto"
+
 #: /Applications/XAMPP/htdocs/php2po/views/start.phtml:28
+msgid "Saída"
+msgstr "salida"
+
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:30
+msgid "Caminho absoluto de saída"
+msgstr "Salida Ruta absoluta"
+
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:34
 #: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:46
 msgid "Idioma"
 msgstr "Idioma"
 
-#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:38
+#: /Applications/XAMPP/htdocs/php2po/views/start.phtml:44
 msgid "Criar"
 msgstr "Crear"
+
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:51
+msgid "Português (Brasil)"
+msgstr "Portugués (Brasil)"
+
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:52
+msgid "Espanhol (Espanha)"
+msgstr "Español (España)"
+
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:53
+msgid "Inglês (Estados Unidos)"
+msgstr "Inglés (Estados Unidos)"
 
 #: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:13
 msgid "Tradução automática"
@@ -126,21 +154,29 @@ msgid "Google Tradutor - Traduzir tudo"
 msgstr "Google Translator - Traducir todo"
 
 #: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:86
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:128
 msgid "Idioma Origem"
 msgstr "Idioma Origen"
 
 #: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:95
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:137
 msgid "Idioma Destino"
 msgstr "Idioma Destino"
 
 #: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:107
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:149
 #: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:96
 msgid "Fechar"
 msgstr "Cerrar"
 
 #: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:108
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:150
 msgid "Traduzir"
 msgstr "Traducir"
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:121
+msgid "Google Tradutor - Traduzir item"
+msgstr "Google Translator - Traducir artículo"
 
 #: /Applications/XAMPP/htdocs/php2po/views/view-project.phtml:8
 msgid "Idiomas"
