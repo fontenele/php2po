@@ -2,11 +2,11 @@
 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12  col-lg-offset-1 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <span class="titulo">{$this->translate('Tradução - ')} <strong>{$lang}</strong></span>
+            <span class="titulo">{$this->translate('Tradução')} <strong>{$lang}</strong></span>
             <div class="pull-right">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></button>
-                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <button type="button" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-cog"></span></button>
+                    <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
@@ -21,7 +21,7 @@
 
         <form role="form" id="frm-table-terms" action="{$hostPath}project/saveTermsLang" method="post">
             <input type="hidden" name="lang" value="{$lang}" />
-            <table class="table" id="tbl-terms">
+            <table class="table table-condensed table-hover table-striped" id="tbl-terms">
                 <thead>
                     <tr>
                         <th width="4%">#</th>
@@ -33,7 +33,7 @@
                 <tbody>
                     {assign var=incTerm value=0}
                     {foreach from=$terms key=texto item=term}
-                        <tr>
+                        <tr {if isset($arrTranslateds.$texto)}class="success"{else}class="warning"{/if}>
                             <td>
                                 <a id="term_{$incTerm}" href="#term_{$incTerm++}" data-toggle="tooltip" title="{foreach from=$term.files key=file item=lines}{$file} {foreach from=$lines item=line} #{$line}{/foreach}<br />{/foreach}"><span class="glyphicon glyphicon-info-sign"></span></a>
                             </td>
@@ -45,8 +45,8 @@
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></button>
-                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    <button type="button" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-cog"></span></button>
+                                    <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
@@ -60,7 +60,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="4">
-                            <button class='btn btn-default pull-right'><span class="glyphicon glyphicon-save"></span> {$this->translate('Salvar')}</button>
+                            <button class='col-lg-2 col-lg-offset-5 col-md-2 col-md-offset-5 col-sm-12 col-xs-12 btn btn-primary'><span class="glyphicon glyphicon-save"></span> {$this->translate('Salvar')}</button>
                         </td>
                     </tr>
                 </tfoot>

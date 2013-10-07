@@ -61,6 +61,22 @@ abstract class Controller {
             $this->cssFiles[] = "{$this->request->controller}/{$this->request->action}.css";
         }
 
+        $this->view->assign('php2poProjects', $this->getProjects());
+
+    }
+
+    public function getProjects() {
+        $projects = array();
+
+        $baseDir = APPLICATION_PATH . 'projects/';
+        $dir = dir($baseDir);
+        while($project = $dir->read()) {
+            if(is_dir($baseDir . $project) && !in_array($project, array('.svn','.', '..'))) {
+                $projects[$project] = $project;
+            }
+        }
+
+        return $projects;
     }
 
     public function displayTemplate($template) {

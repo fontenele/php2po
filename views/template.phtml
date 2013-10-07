@@ -4,7 +4,7 @@
 		<title>php2po</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="php2po - Create and convert Po and Mo translations files.">
+        <meta name="description" content="php2po - {$this->translate('Cria e converte arquivos de tradução Po e Mo.')}">
         <meta name="author" content="Guilherme Fontenele, Mathias Grimm">
         <link href="{$hostPath}css/bootstrap.min.css" rel="stylesheet">
         <link href="{$hostPath}css/bootstrap-theme.min.css" rel="stylesheet">
@@ -22,9 +22,47 @@
         <div id="wrap">
             <div class="container">
 
-                <div class="page-header">
-                    <h1>php2po</h1>
-                </div>
+                <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">{$this->translate('Abrir/Fechar')}</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{$hostPath}">php2po</a>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$this->translate('Projeto')} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{$hostPath}project/start">{$this->translate('Novo')}</a></li>
+                                    <li><a href="{$hostPath}project/import">{$this->translate('Importar')}</a></li>
+                                    {if count($php2poProjects)}
+                                        <li role="presentation" class="divider"></li>
+                                        <li role="presentation" class="dropdown-header">{$this->translate('Projetos recentes')}</li>
+                                        {foreach from=$php2poProjects item=project}
+                                            <li><a href="{$hostPath}project/importSave/frk-project/{$project}">{$project}</a></li>
+                                        {/foreach}
+                                    {/if}
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$this->translate('Mudar idioma')} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{$hostPath}home/changeLang/lang/pt_BR"><img src='{$hostPath}img/locales/pt_BR.png' title="{$this->translate('Português (Brasil)')}" /> {$this->translate('Português (Brasil)')}</a></li>
+                                    <li><a href="{$hostPath}home/changeLang/lang/es_ES"><img src='{$hostPath}img/locales/es_ES.png' title="{$this->translate('Espanhol (Espanha)')}" /> {$this->translate('Espanhol (Espanha)')}</a></li>
+                                    <li><a href="{$hostPath}home/changeLang/lang/en_US"><img src='{$hostPath}img/locales/en_US.png' title="{$this->translate('Inglês (Estados Unidos)')}" /> {$this->translate('Inglês (Estados Unidos)')}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+
 
                 <ol class="breadcrumb">
                     {assign var=php2poTotalBreadCrumbs value=count($php2poBreadCrumbs)}
@@ -46,13 +84,6 @@
             <div class="container">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <p class="text-muted credit"> <a href="https://github.com/fontenele/php2po">php2po</a></p>
-                    <p>
-                        <ul class='list-unstyled list-inline'>
-                            <li><a href="{$hostPath}home/changeLang/lang/pt_BR"><img src='{$hostPath}img/locales/pt_BR.png' title="{$this->translate('Português (Brasil)')}" /></a></li>
-                            <li><a href="{$hostPath}home/changeLang/lang/es_ES"><img src='{$hostPath}img/locales/es_ES.png' title="{$this->translate('Espanhol (Espanha)')}" /></a></li>
-                            <li><a href="{$hostPath}home/changeLang/lang/en_US"><img src='{$hostPath}img/locales/en_US.png' title="{$this->translate('Inglês (Estados Unidos)')}" /></a></li>
-                        </ul>
-                    </p>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <p class="text-muted">

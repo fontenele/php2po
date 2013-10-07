@@ -47,25 +47,16 @@ class Project extends Controller {
     public function import() {
         $this->breadcrumbs[] = array($this->translate('Importar Projeto'), 'project/import');
 
-        $dir = dir(APPLICATION_PATH . 'projects');
-        $projects = array();
-
-        while($project = $dir->read()) {
-            if(!in_array($project, array('.svn', '..', '.', 'index.php'))) {
-                $projects[] = $project;
-            }
-        }
-
-        $this->view->assign('projects', $projects);
+        $this->view->assign('projects', $this->getProjects());
         $this->displayTemplate('import.phtml');
     }
 
     public function importSave() {
         $xml = $project = null;
 
-        if($this->request->post->offsetGet('frk-project')) {
-            $xml = simplexml_load_file(APPLICATION_PATH . "projects/{$this->request->post->offsetGet('frk-project')}/project.xml");
-            $project = $this->request->post->offsetGet('frk-project');
+        if($this->request->offsetGet('frk-project')) {
+            $xml = simplexml_load_file(APPLICATION_PATH . "projects/{$this->request->offsetGet('frk-project')}/project.xml");
+            $project = $this->request->offsetGet('frk-project');
         }elseif($this->request->files->offsetGet('des-caminho-xml')) {
             /* @todo desabilitado pela mudança no diretorio project - remover comentário */
             /*$file = $this->request->files->offsetGet('des-caminho-xml');
@@ -128,6 +119,7 @@ class Project extends Controller {
         $this->view->assign('projectDir', $this->session->getAttribute('des-caminho'));
         $this->view->assign('patterns', array('$this->translate()'));
         $this->view->assign('ignoreDirs', array(".", '..', '.svn'));
+        $this->view->assign('langDefault', $this->session->getAttribute('frk-idioma-default'));
 
         $arrIdiomas = $this->session->getAttribute('arr-langs') && is_array($this->session->getAttribute('arr-langs')) ? $this->session->getAttribute('arr-langs') : array();
         $arrTerms = $this->session->getAttribute('arr-terms') && is_array($this->session->getAttribute('arr-terms')) ? $this->session->getAttribute('arr-terms') : array();

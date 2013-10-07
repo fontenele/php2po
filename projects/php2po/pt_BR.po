@@ -7,8 +7,8 @@
 # LANG: pt_BR
 #
 msgid ""msgstr """Project-Id-Version: php2po\n"
-"POT-Creation-Date: 2013-09-22 03:09:02\n"
-"PO-Revision-Date: 2013-09-22 03:09:02\n"
+"POT-Creation-Date: 2013-10-05 07:04:33\n"
+"PO-Revision-Date: 2013-10-05 07:04:33\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,8 +31,7 @@ msgstr ""
 msgid "Importar Projeto"
 msgstr ""
 
-#: /Applications/XAMPP/htdocs/php2po/controllers/project.php:213
-#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:5
+#: /Applications/XAMPP/htdocs/php2po/controllers/project.php:218
 msgid "Tradução - "
 msgstr ""
 
@@ -41,11 +40,13 @@ msgid "Escolha uma opção"
 msgstr ""
 
 #: /Applications/XAMPP/htdocs/php2po/views/home.phtml:8
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:40
 msgid "Novo"
 msgstr ""
 
 #: /Applications/XAMPP/htdocs/php2po/views/home.phtml:9
 #: /Applications/XAMPP/htdocs/php2po/views/import.phtml:31
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:41
 msgid "Importar"
 msgstr ""
 
@@ -107,16 +108,41 @@ msgstr ""
 msgid "Criar"
 msgstr ""
 
-#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:51
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:7
+msgid "Cria e converte arquivos de tradução Po e Mo."
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:28
+msgid "Abrir/Fechar"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:38
+msgid "Projeto"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:44
+msgid "Projetos recentes"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:54
+msgid "Mudar idioma"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:56
 msgid "Português (Brasil)"
 msgstr ""
 
-#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:52
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:57
 msgid "Espanhol (Espanha)"
 msgstr ""
 
-#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:53
+#: /Applications/XAMPP/htdocs/php2po/views/template.phtml:58
 msgid "Inglês (Estados Unidos)"
+msgstr ""
+
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:5
+#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:29
+msgid "Tradução"
 msgstr ""
 
 #: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:13
@@ -130,10 +156,6 @@ msgstr ""
 
 #: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:28
 msgid "Texto"
-msgstr ""
-
-#: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:29
-msgid "Tradução"
 msgstr ""
 
 #: /Applications/XAMPP/htdocs/php2po/views/view-lang.phtml:30
